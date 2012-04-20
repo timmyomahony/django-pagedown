@@ -7,4 +7,4 @@ A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedo
 
 ---
 
-![Screenshot of Django Admin with Pagedown initialised](./django-pagedown-screenshot.png "A screenshot of Pagedown in Django's admin")
+![Screenshot of Django Admin with Pagedown initialised](https://github.com/pastylegs/django_pagedown/blob/master/django-pagedown-screenshot.png?raw=true "A screenshot of Pagedown in Django's admin")
