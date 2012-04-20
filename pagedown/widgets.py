@@ -6,7 +6,7 @@ from django.utils.html import escape, conditional_escape
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 
-class PageDownWidget(forms.Textarea):
+class PagedownWidget(forms.Textarea):
     class Media:
         css = {
             'all' : ('pagedown/demo/browser/demo.css',)
@@ -48,7 +48,7 @@ class PageDownWidget(forms.Textarea):
             }
         return mark_safe(html)
         
-class AdminPageDownWidget(admin_widgets.AdminTextareaWidget, PageDownWidget):
+class AdminPagedownWidget(admin_widgets.AdminTextareaWidget, PagedownWidget):
     class Media:
         css = {
             'all' : ('admin/css/pagedown.css',)

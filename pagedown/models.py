@@ -1,4 +1,4 @@
 from django.db import models
 
-class PageDownField(models.TextField):
+class PagedownField(models.TextField):
     pass
