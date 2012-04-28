@@ -1,5 +1,16 @@
 import os
+from os import path
 from setuptools import setup
+from subprocess import check_call
+from distutils.command.build import build
+
+class build_with_submodules(build):
+    def run(self):
+        if path.exists('.git'):
+            check_call(['git', 'submodule', 'init'])
+            check_call(['git', 'submodule', 'update'])
+        build.run(self)
+
 
 setup(
   name = "Django Pagedown",
@@ -14,4 +25,5 @@ setup(
     "Django >= 1.2",
   ],
   license='LICENSE.txt',
+  cmdclass={"build": build_with_submodules},
 )
