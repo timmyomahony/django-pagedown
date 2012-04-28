@@ -11,9 +11,9 @@ class PagedownWidget(forms.Textarea):
         css = {
             'all' : ('pagedown/demo/browser/demo.css',)
         }
-        js = ('%s/pagedown/Markdown.Converter.js' % settings.STATIC_URL,
-              '%s/pagedown/Markdown.Sanitizer.js' % settings.STATIC_URL,
-              '%s/pagedown/Markdown.Editor.js' % settings.STATIC_URL,)
+        js = ('%s/pagedown/pagedown/Markdown.Converter.js' % settings.STATIC_URL,
+              '%s/pagedown/pagedown/Markdown.Sanitizer.js' % settings.STATIC_URL,
+              '%s/pagedown/pagedown/Markdown.Editor.js' % settings.STATIC_URL,)
     
     def render(self, name, value, attrs=None):
         if value is None: value = ''
