@@ -11,7 +11,7 @@ A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedo
 
 #### Installation ####
 
-- Install via pip: `pip install -e https://timmyomahony@github.com/timmyomahony/django-pagedown.git#egg=django-pagedown` 
+- Install via pip: `pip install -e https://timmyomahony@github.com/timmyomahony/django-pagedown.git#egg=django-pagedown` for the latest version, otherwise 'pip install django-pagedown' 
 - Add `pagedown` to your `INSTALLED_APPS`
 
 Note that this package will install a cloned copy of the Pagedown library from [http://github.com/timmyomahony/pagedown/](http://github.com/timmyomahony/pagedown/)
