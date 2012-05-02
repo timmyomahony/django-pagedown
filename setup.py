@@ -15,8 +15,6 @@ class build_with_submodules(build):
             src = "pagedown/static/pagedown/pagedown/"
             copy_tree(src, dst)
             remove_tree(src)
-            os.remove("pagedown/static/pagedown/.git")
-            os.remove("pagedown/static/pagedown/README.md")
         build.run(self)
 
 
