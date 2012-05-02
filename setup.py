@@ -17,9 +17,8 @@ class build_with_submodules(build):
             remove_tree(src)
         build.run(self)
 
-
 setup(
-  name = "Django Pagedown",
+  name = "django-pagedown",
   version = "0.0.1",
   author = "Timmy O'Mahony",
   author_email = "me@timmyomahony.com",
