@@ -21,6 +21,7 @@ setup(
   description = ("A django app that allows the easy addition of Stack Overflow's 'PageDown' markdown editor to a django form field"),
   long_description=open('README.md').read(),
   packages=['pagedown'],
+  include_package_data=True,
   install_requires=[
     "Django >= 1.3",
   ],
