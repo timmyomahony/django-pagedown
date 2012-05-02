@@ -23,18 +23,19 @@ If you want to use the pagedown editor in a django admin field, there are numero
 
 To use it in **all** `TextField`'s in you admin form:
 
-	from pagedown.widgets import AdminPageDownWidget
+	from pagedown.widgets import AdminPagedownWidget
+	from django.db import models
     class FooModelAdmin(models.ModelAdmin):
     	formfield_overrides = {
-        	models.TextField: {'widget': AdminPageDownWidget },
+        	models.TextField: {'widget': AdminPagedownWidget },
     	}
     	
 Alternatively, to only use it on particular fields, first create a form (in `forms.py`): 
 
-	from pagedown.widgets import AdminPageDownWidget
+	from pagedown.widgets import AdminPagedownWidget
 	class FooModelForm(forms.ModelForm):
-		a_text_field = forms.TextField(widget=AdminPageDownWidget())		
-		another_text_field = forms.TextField(widget=AdminPageDownWidget())	
+		a_text_field = forms.TextField(widget=AdminPagedownWidget())		
+		another_text_field = forms.TextField(widget=AdminPagedownWidget())	
 		
 		class Meta:
 			model = FooModel
