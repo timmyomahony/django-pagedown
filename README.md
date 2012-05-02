@@ -33,9 +33,12 @@ To use it in **all** `TextField`'s in you admin form:
 Alternatively, to only use it on particular fields, first create a form (in `forms.py`): 
 
 	from pagedown.widgets import AdminPagedownWidget
+	from django import forms
+	from models import FooModel
+	
 	class FooModelForm(forms.ModelForm):
-		a_text_field = forms.TextField(widget=AdminPagedownWidget())		
-		another_text_field = forms.TextField(widget=AdminPagedownWidget())	
+		a_text_field = forms.CharField(widget=AdminPagedownWidget())		
+		another_text_field = forms.CharField(widget=AdminPagedownWidget())	
 		
 		class Meta:
 			model = FooModel
