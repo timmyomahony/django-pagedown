@@ -14,6 +14,9 @@ A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedo
 - Install via pip: `pip install -e https://timmyomahony@github.com/timmyomahony/django-pagedown.git#egg=django-pagedown` 
 - Add `pagedown` to your `INSTALLED_APPS`
 
+Note that this package will install a cloned copy of the Pagedown library from [http://github.com/timmyomahony/pagedown/](http://github.com/timmyomahony/pagedown/)
+
+
 #### Usage ####
 
 If you want to use the pagedown editor in a django admin field, there are numerous possible approaches:
