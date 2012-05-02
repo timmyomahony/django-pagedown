@@ -20,7 +20,7 @@ setup(
   url = "https://github.com/timmyomahony/django-pagedown",
   description = ("A django app that allows the easy addition of Stack Overflow's 'PageDown' markdown editor to a django form field"),
   long_description=open('README.md').read(),
-  packages=['django_pagedown'],
+  packages=['pagedown'],
   install_requires=[
     "Django >= 1.2",
   ],
