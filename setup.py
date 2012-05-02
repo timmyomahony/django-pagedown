@@ -14,7 +14,7 @@ class build_with_submodules(build):
 
 setup(
   name = "Django Pagedown",
-  version = "0.0.1dev",
+  version = "0.0.1",
   author = "Timmy O'Mahony",
   author_email = "me@timmyomahony.com",
   url = "https://github.com/timmyomahony/django-pagedown",
@@ -22,7 +22,7 @@ setup(
   long_description=open('README.md').read(),
   packages=['pagedown'],
   install_requires=[
-    "Django >= 1.2",
+    "Django >= 1.3",
   ],
   license='LICENSE.txt',
   cmdclass={"build": build_with_submodules},
