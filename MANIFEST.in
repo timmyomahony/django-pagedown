@@ -1,1 +1,1 @@
-recursive-include pagedown/static/*
+recursive-include pagedown/static/ *
