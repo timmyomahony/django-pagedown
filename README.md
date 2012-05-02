@@ -3,11 +3,11 @@ Django Pagedown
 
 A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedown&quot; Markdown editor](http://code.google.com/p/pagedown/) to a django form field, whether in a custom app or the Django Admin
 
-![Screenshot of Django Admin with Pagedown initialised](https://github.com/pastylegs/django-pagedown/blob/master/django-pagedown-screenshot.png?raw=true "A screenshot of Pagedown in Django's admin")
+![Screenshot of Django Admin with Pagedown initialised](https://github.com/timmyomahony/django-pagedown/blob/master/django-pagedown-screenshot.png?raw=true "A screenshot of Pagedown in Django's admin")
 
 #### Installation ####
 
-- Install via pip: `pip install -e https://github.com/pastylegs/django_pagedown.git#egg=django-pagedown` 
+- Install via pip: `pip install -e https://timmyomahony@github.com/timmyomahony/django-pagedown.git#egg=django-pagedown` 
 - Add `pagedown` to your `INSTALLED_APPS`
 
 #### Usage ####
@@ -42,4 +42,3 @@ and in your `admin.py`:
 #### Notes ####
    	
 * There are two widgets, `AdminPageDownWidget` and `PageDownWidget`. The only difference is that `AdminPageDownWidget` includes extra CSS to make the preview area and input pretty in the django admin. If you are using the editor for your own app, you will need to supply CSS to do this. 
-* The actual Javascript for the pagedown editor is a fork of the offical StackOverflow repository ([on Google Code](http://code.google.com/p/pagedown/) / [on Github](https://github.com/ujifgc/pagedown)). The changes simply allow the editor to be initialised with custom Ids for the button bar, preview are and textarea input. The fork is here (and included in `django_pagedown` by default): [https://github.com/pastylegs/pagedown](https://github.com/pastylegs/pagedown)
