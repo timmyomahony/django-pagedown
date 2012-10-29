@@ -8,6 +8,8 @@ from setuptools.command.develop import develop
 
 def get_submodules_and_fix_paths():
     if path.exists('.git'):
+        check_call(['rm', '-rf', 'pagedown/static/pagedown'])
+        check_call(['git', 'reset', '--hard'])
         check_call(['git', 'submodule', 'init'])
         check_call(['git', 'submodule', 'update'])
         # Move contents of pagedown and remove .git
