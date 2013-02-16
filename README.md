@@ -46,7 +46,7 @@ Alternatively, to only use it on particular fields, first create a form (in `for
 and in your `admin.py`:
 
 	from forms import FooModelForm
-    class FooModelAdmin(models.ModelAdmin):
+    class FooModelAdmin(admin.ModelAdmin):
     	form = FooModelForm   
  
  
