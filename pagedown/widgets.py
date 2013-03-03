@@ -39,7 +39,7 @@ class PagedownWidget(forms.Textarea):
                         button : "%(id)s_wmd_button_bar",
                         preview : "%(id)s_wmd_preview",
                     }
-                    var editor = new Markdown.Editor(converter, "", selectors);
+                    var editor = new Markdown.Editor(converter, selectors, "");
                     editor.run();
                 })();
             </script>
