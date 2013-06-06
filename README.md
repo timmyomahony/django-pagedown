@@ -11,10 +11,18 @@ A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedo
 
 #### Installation ####
 
-- Install via pip: `pip install -e https://timmyomahony@github.com/timmyomahony/django-pagedown.git#egg=django-pagedown` for the latest version, otherwise 'pip install django-pagedown' 
-- Add `pagedown` to your `INSTALLED_APPS`
+1. Get the code: `pip install django-pagedown`
+2. Add `pagedown` to your `INSTALLED_APPS`
 
-Note that this package will install a cloned copy of the Pagedown library from [http://github.com/timmyomahony/pagedown/](http://github.com/timmyomahony/pagedown/)
+Note that this package will install a cloned copy (git submodule)of the Pagedown library from [http://github.com/timmyomahony/pagedown/](http://github.com/timmyomahony/pagedown/).
+
+If you don't like (or are having problems with) PyPi, you can alternatively install: 
+
+ - Via pip from GitHub: `pip install -e https://timmyomahony@github.com/timmyomahony/django-pagedown.git#egg=django-pagedown`
+ - Manually clone from Github: 
+     - `git clone https://timmyomahony@github.com/timmyomahony/django-pagedown.git`  
+     - `cd django-pagedown`
+     - `git submodule update --init`
 
 
 #### Usage ####
@@ -52,6 +60,7 @@ and in your `admin.py`:
     from models import FooModel
     from django.contrib import admin
     
+
     class FooModelAdmin(admin.ModelAdmin):
     	form = FooModelForm   
     	
