@@ -13,6 +13,7 @@ A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedo
 
 1. Get the code: `pip install django-pagedown`
 2. Add `pagedown` to your `INSTALLED_APPS`
+3. Make sure to collect the static files: `python manage.py collectstatic --noinput`
 
 Note that this package will install a cloned copy (git submodule)of the Pagedown library from [http://github.com/timmyomahony/pagedown/](http://github.com/timmyomahony/pagedown/).
 
