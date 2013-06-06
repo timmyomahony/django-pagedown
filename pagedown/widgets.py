@@ -46,7 +46,7 @@ class PagedownWidget(forms.Textarea):
             """ % {
                 'attrs': flatatt(final_attrs),
                 'body': conditional_escape(force_unicode(value)),
-                'id': attrs['id'],
+                'id': final_attrs['id'],
             }
         return mark_safe(html)
 
