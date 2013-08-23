@@ -3,7 +3,11 @@ from django.conf import settings
 from django.contrib.admin import widgets as admin_widgets
 from django.forms.widgets import flatatt
 from django.utils.html import conditional_escape
-from django.utils.encoding import force_unicode
+try:
+    from django.utils.encoding import force_unicode
+except ImportError: #python3
+    # https://docs.djangoproject.com/en/1.5/topics/python3/#string-handling
+    from django.utils.encoding import force_text as force_unicode
 from django.utils.safestring import mark_safe
 
 
