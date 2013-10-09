@@ -25,8 +25,11 @@ If you don't like (or are having problems with) PyPi, you can alternatively inst
      - `cd django-pagedown`
      - `git submodule update --init`
 
+---
 
 #### Usage ####
+
+**Inside the Django Admin:**
 
 If you want to use the pagedown editor in a django admin field, there are numerous possible approaches:
 
@@ -52,7 +55,7 @@ Alternatively, to only use it on particular fields, first create a form (in `for
         a_text_field = forms.CharField(widget=AdminPagedownWidget())		
         another_text_field = forms.CharField(widget=AdminPagedownWidget())	
 		
-	class Meta:
+        class Meta:
 	    model = FooModel
 			
 and in your `admin.py`:
@@ -66,7 +69,48 @@ and in your `admin.py`:
     	form = FooModelForm   
     	
     admin.site.register(FooModel, FooModelAdmin)
- 
+
+**Outside the Django Admin:**
+
+To use the widget outside of the django admin, first create a form similar to the above but using the basic `PagedownWidget`: 
+
+    from pagedown.widgets import PagedownWidget 
+    from django import forms
+    from models import FooModel
+	
+	
+    class FooModelForm(forms.ModelForm):
+        a_text_field = forms.CharField(widget=PagedownWidget())		
+        another_text_field = forms.CharField(widget=PagedownWidget())	
+		
+        class Meta:
+	    model = FooModel
+
+
+Then define your urls/views: 
+
+    from forms import FooModelForm
+    from django.views.generic import FormView
+    from django.conf.urls import patterns, url
+
+    urlpatterns = patterns('',
+        url(r'^$', FormView.as_view(
+            template_name="baz.html",
+            form_class=FooModelForm)),
+    )
+
+then create the template and load the javascipt and css required to create the editor: 
+
+    <html>
+        <head>
+            {{ form.media }}
+        </head>
+        <body>
+            <form ...>
+                {{ form }}
+            </form>
+        </body>
+    </html>
  
 #### Notes ####
    	
