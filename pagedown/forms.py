@@ -1,5 +1,5 @@
 from django import forms
-from widgets import AdminPagedownWidget, PagedownWidget
+from .widgets import AdminPagedownWidget, PagedownWidget
 
 
 class PagedownField(forms.CharField):
