@@ -15,7 +15,8 @@ class PagedownWidget(forms.Textarea):
         }
         js = ('%s/pagedown/Markdown.Converter.js' % STATIC_URL,
               '%s/pagedown/Markdown.Sanitizer.js' % STATIC_URL,
-              '%s/pagedown/Markdown.Editor.js' % STATIC_URL,)
+              '%s/pagedown/Markdown.Editor.js' % STATIC_URL,
+              '%s/pagedown_init.js' % STATIC_URL,)
 
     def render(self, name, value, attrs=None):
         if value is None:
@@ -25,25 +26,13 @@ class PagedownWidget(forms.Textarea):
         attrs['class'] += " wmd-input"
         final_attrs = self.build_attrs(attrs, name=name)
         html = """
-            <div class="wmd-wrapper">
+            <div class="wmd-wrapper" id="test-wmd">
                 <div class="wmd-panel">
-                <div id="%(id)s_wmd_button_bar"></div>
-                <textarea%(attrs)s>%(body)s</textarea>
+                    <div id="%(id)s_wmd_button_bar"></div>
+                    <textarea%(attrs)s>%(body)s</textarea>
                 </div>
                 <div id="%(id)s_wmd_preview" class="wmd-panel wmd-preview"></div>
             </div>
-            <script type="text/javascript">
-                (function () {
-                    var converter = Markdown.getSanitizingConverter();
-                    selectors = {
-                        input : "%(id)s",
-                        button : "%(id)s_wmd_button_bar",
-                        preview : "%(id)s_wmd_preview",
-                    }
-                    var editor = new Markdown.Editor(converter, "", selectors);
-                    editor.run();
-                })();
-            </script>
             """ % {
                 'attrs': flatatt(final_attrs),
                 'body': conditional_escape(force_unicode(value)),
