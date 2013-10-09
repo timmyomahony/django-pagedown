@@ -52,7 +52,7 @@ Alternatively, to only use it on particular fields, first create a form (in `for
         a_text_field = forms.CharField(widget=AdminPagedownWidget())		
         another_text_field = forms.CharField(widget=AdminPagedownWidget())	
 		
-	class Meta:
+        class Meta:
 	    model = FooModel
 			
 and in your `admin.py`:
@@ -66,7 +66,27 @@ and in your `admin.py`:
     	form = FooModelForm   
     	
     admin.site.register(FooModel, FooModelAdmin)
- 
+
+Be aware that if you are using the widget outside of the django admin, you need to add the css and js files associated with the widget. If you have an url/view like so: 
+
+    urlpatterns = patterns('',
+        url(r'^$', FormView.as_view(
+            template_name="foo/bar.html",
+            form_class=FooModelForm)),
+    )
+
+you can do this in your template very easily using `{{ form.media }}`:
+
+    <html>
+        <head>
+            {{ form.media }}
+        </head>
+        <body>
+            <form ...>
+                {{ form }}
+            </form>
+        </body>
+    </html>
  
 #### Notes ####
    	
