@@ -1,8 +1,12 @@
 from django import forms
-from widgets import AdminPagedownWidget
+from widgets import AdminPagedownWidget, PagedownWidget
 
-class PagedownForm(forms.Form):
-    """ An example form that includes the javascript required
-    for PageDown automatically """
-    
-    body = forms.CharField(widget=AdminPagedownWidget())
+
+class PagedownField(forms.CharField):
+    ''' A simple CharField that allows us avoid having to write widget code '''
+    widget = PagedownWidget
+
+
+class AdminPagedownField(forms.CharField):
+    ''' A simple CharField that allows us avoid having to write widget code '''
+    widget = AdminPagedownWidget
