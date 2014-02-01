@@ -19,7 +19,7 @@ Note that this package will install a cloned copy (git submodule)of the Pagedown
 
 If you don't like (or are having problems with) PyPi, you can alternatively install: 
 
- - Via pip from GitHub: `pip install -e https://timmyomahony@github.com/timmyomahony/django-pagedown.git#egg=django-pagedown`
+ - Via pip from GitHub: `pip install -e git+https://timmyomahony@github.com/timmyomahony/django-pagedown.git#egg=django-pagedown`
  - Manually clone from Github: 
      - `git clone https://timmyomahony@github.com/timmyomahony/django-pagedown.git`  
      - `cd django-pagedown`
