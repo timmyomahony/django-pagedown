@@ -5,8 +5,11 @@ function bindPagedown(){
 
     for (var i = 0; i < elements.length; ++i){
         var el = elements[i];
-        var isTemplate = !$(el).is(":visible");
-        if(isTemplate)break;
+        var $el = $(el);
+        var isTemplate = !$el.is(":visible");
+        var hasRun = $el.data('pagedowned');
+        if(isTemplate || hasRun)continue;
+        $el.data('pagedowned', true);
         if ( (' ' + el.className + ' ').indexOf(' wmd-input ') > -1 ) {
             selectors = {
                 input : el.id,
