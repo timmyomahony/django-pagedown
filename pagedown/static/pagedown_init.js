@@ -1,8 +1,12 @@
-function initPagedown() {
+function bindPagedown(){
+    var $ = django.jQuery;
     var converter = Markdown.getSanitizingConverter(),
         elements = document.getElementsByTagName("textarea");
+
     for (var i = 0; i < elements.length; ++i){
         var el = elements[i];
+        var isTemplate = !$(el).is(":visible");
+        if(isTemplate)break;
         if ( (' ' + el.className + ' ').indexOf(' wmd-input ') > -1 ) {
             selectors = {
                 input : el.id,
@@ -13,5 +17,13 @@ function initPagedown() {
             editor.run();
         }
     }
+}
+
+
+function initPagedown() {
+    var $ = django.jQuery;
+    $('.add-row, .grp-add-handler').bind('click', bindPagedown);
+    bindPagedown();
+
 }
 window.onload = initPagedown;
