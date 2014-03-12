@@ -3,6 +3,8 @@ from django.conf import settings
 from django.contrib.admin import widgets as admin_widgets
 from django.forms.widgets import flatatt
 from django.utils.html import conditional_escape
+from django.contrib.staticfiles.storage import staticfiles_storage
+
 try:
     from django.utils.encoding import force_unicode
 except ImportError: #python3
@@ -10,17 +12,16 @@ except ImportError: #python3
     from django.utils.encoding import force_text as force_unicode
 from django.utils.safestring import mark_safe
 
-STATIC_URL = settings.STATIC_URL.rstrip('/')
 
 class PagedownWidget(forms.Textarea):
     class Media:
         css = {
-            'all': ('pagedown/demo/browser/demo.css',)
+            'all': (staticfiles_storage.url('pagedown/demo/browser/demo.css'),)
         }
-        js = ('%s/pagedown/Markdown.Converter.js' % STATIC_URL,
-              '%s/pagedown/Markdown.Sanitizer.js' % STATIC_URL,
-              '%s/pagedown/Markdown.Editor.js' % STATIC_URL,
-              '%s/pagedown_init.js' % STATIC_URL,)
+        js = (staticfiles_storage.url('pagedown/Markdown.Converter.js'),
+              staticfiles_storage.url('pagedown/Markdown.Sanitizer.js'),
+              staticfiles_storage.url('pagedown/Markdown.Editor.js'),
+              staticfiles_storage.url('pagedown_init.js'),)
 
     def render(self, name, value, attrs=None):
         if value is None:
@@ -48,5 +49,5 @@ class PagedownWidget(forms.Textarea):
 class AdminPagedownWidget(admin_widgets.AdminTextareaWidget, PagedownWidget):
     class Media:
         css = {
-            'all': ('admin/css/pagedown.css',)
+            'all': (staticfiles_storage.url('admin/css/pagedown.css'),)
         }
