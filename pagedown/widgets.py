@@ -12,24 +12,34 @@ except ImportError: #python3
 from django.utils.safestring import mark_safe
 
 
-def compatible_staticpaths(path):
-    # Allows the use of `staticfiles_storage` in versions >= then Django 1.4
-    # (so that remote storages can be used) but normal paths for <= Django 1.4
+def compatible_staticpath(path):
+    # Try to return a path compatible all the way back to Django 1.2. If anyone
+    # has a cleaner or better way to do this let me know!
     try:
         from django.contrib.staticfiles.storage import staticfiles_storage
         return staticfiles_storage.url(path)
     except ImportError:
+        pass
+    try:
         return '%s/%s' % (settings.STATIC_URL.rstrip('/'), path)
+    except AttributeError:
+        pass
+    try:
+        return '%s/%s' % (settings.PAGEDOWN_URL.rstrip('/'), path)
+    except AttributeError:
+        pass
+    return '%s/%s' % (settings.MEDIA_URL.rstrip('/'), path)
+
 
 class PagedownWidget(forms.Textarea):
     class Media:
         css = {
-            'all': (compatible_staticpaths('pagedown/demo/browser/demo.css'),)
+            'all': (compatible_staticpath('pagedown/demo/browser/demo.css'),)
         }
-        js = (compatible_staticpaths('pagedown/Markdown.Converter.js'),
-              compatible_staticpaths('pagedown/Markdown.Sanitizer.js'),
-              compatible_staticpaths('pagedown/Markdown.Editor.js'),
-              compatible_staticpaths('pagedown_init.js'),)
+        js = (compatible_staticpath('pagedown/Markdown.Converter.js'),
+              compatible_staticpath('pagedown/Markdown.Sanitizer.js'),
+              compatible_staticpath('pagedown/Markdown.Editor.js'),
+              compatible_staticpath('pagedown_init.js'),)
 
     def render(self, name, value, attrs=None):
         if value is None:
@@ -57,5 +67,5 @@ class PagedownWidget(forms.Textarea):
 class AdminPagedownWidget(admin_widgets.AdminTextareaWidget, PagedownWidget):
     class Media:
         css = {
-            'all': (compatible_staticpaths('admin/css/pagedown.css'),)
+            'all': (compatible_staticpath('admin/css/pagedown.css'),)
         }
