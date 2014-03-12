@@ -39,5 +39,5 @@ setup(
     "Django >= 1.3",
   ],
   license='LICENSE.txt',
-  cmdclass={"build": build_with_submodules, "develop": develop_with_submodules},
+  #cmdclass={"build": build_with_submodules, "develop": develop_with_submodules},
 )
