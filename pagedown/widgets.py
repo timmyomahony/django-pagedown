@@ -3,7 +3,6 @@ from django.conf import settings
 from django.contrib.admin import widgets as admin_widgets
 from django.forms.widgets import flatatt
 from django.utils.html import conditional_escape
-from django.contrib.staticfiles.storage import staticfiles_storage
 
 try:
     from django.utils.encoding import force_unicode
@@ -13,15 +12,24 @@ except ImportError: #python3
 from django.utils.safestring import mark_safe
 
 
+def compatible_staticpaths(path):
+    # Allows the use of `staticfiles_storage` in versions >= then Django 1.4
+    # (so that remote storages can be used) but normal paths for <= Django 1.4
+    try:
+        from django.contrib.staticfiles.storage import staticfiles_storage
+        return staticfiles_storage.url(path)
+    except ImportError:
+        return '%s/%s' % (settings.STATIC_URL.rstrip('/'), path)
+
 class PagedownWidget(forms.Textarea):
     class Media:
         css = {
-            'all': (staticfiles_storage.url('pagedown/demo/browser/demo.css'),)
+            'all': (compatible_staticpaths('pagedown/demo/browser/demo.css'),)
         }
-        js = (staticfiles_storage.url('pagedown/Markdown.Converter.js'),
-              staticfiles_storage.url('pagedown/Markdown.Sanitizer.js'),
-              staticfiles_storage.url('pagedown/Markdown.Editor.js'),
-              staticfiles_storage.url('pagedown_init.js'),)
+        js = (compatible_staticpaths('pagedown/Markdown.Converter.js'),
+              compatible_staticpaths('pagedown/Markdown.Sanitizer.js'),
+              compatible_staticpaths('pagedown/Markdown.Editor.js'),
+              compatible_staticpaths('pagedown_init.js'),)
 
     def render(self, name, value, attrs=None):
         if value is None:
@@ -49,5 +57,5 @@ class PagedownWidget(forms.Textarea):
 class AdminPagedownWidget(admin_widgets.AdminTextareaWidget, PagedownWidget):
     class Media:
         css = {
-            'all': (staticfiles_storage.url('admin/css/pagedown.css'),)
+            'all': (compatible_staticpaths('admin/css/pagedown.css'),)
         }
