@@ -182,9 +182,3 @@ The following options can be added to your default `settings.py` file to control
 - `PAGEDOWN_SHOW_PREVIEW` (boolean): whether or not to show the dynamic markdown preview below the markdown text area for the pagedown widgets. The default is `True`.
 - `PAGEDOWN_DEFAULT_TEMPLATE` (string): the template used to render the pagedown widget. The default template is located in `pagedown/widgets/default.html`. 
 - `PAGEDOWN_WIDGET_CSS` (tuple): the path to the CSS file to be used by the pagedown widget. The default path is `pagedown/
-
----
-
-#### Notes ####
-
-* There are two widgets, `AdminPageDownWidget` and `PageDownWidget`. The only difference is that `AdminPageDownWidget` includes extra CSS to make the preview area and input pretty in the django admin. If you are using the editor for your own app, you will need to supply CSS to do this.
