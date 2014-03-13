@@ -157,7 +157,9 @@ If you want to change the CSS used to display the widgets, you also can. Again, 
 
  - **Globally:** You can specify the CSS files to be included by the widget by providing a tuple of paths via a `PAGEDOWN_WIDGET_CSS` variable in your `settings.py`
 
-		PAGEDOWN_WIDGET_CSS = ("custom/css1.css", "custom/css2.css")
+		# Import the default pagedown css first, then our custom CSS sheet
+		# to avoid having to specify all the default styles
+		PAGEDOWN_WIDGET_CSS = ('pagedown/demo/browser/demo.css', "pagedown/custom.css",)
  
 - **Per Widget:** by supplying a `css` keyword argument when initialising your widget instance in your form
 
