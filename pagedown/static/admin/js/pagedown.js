@@ -2,7 +2,7 @@
     $(document).ready(function(){
         /*
          * Admin inline support
-         * - this is very finicky at the moment and not idea. It will be much easier
+         * - this is very finicky at the moment and not ideal. It will be much easier
          *   once custom events are triggered on add/remove of dynamic inlines
          *   https://code.djangoproject.com/ticket/15760
          */
