@@ -19,7 +19,7 @@ from django.utils.safestring import mark_safe
 class PagedownWidget(forms.Textarea):
     class Media:
         css = {
-            'all': (compatible_staticpath('pagedown/demo/browser/demo.css'),)
+            'all': (compatible_staticpath(pagedown_settings.WIDGET_CSS),)
         }
         js = (compatible_staticpath('pagedown/Markdown.Converter.js'),
               compatible_staticpath('pagedown/Markdown.Sanitizer.js'),
