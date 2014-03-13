@@ -17,11 +17,11 @@ A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedo
 
 Note that this package will install a cloned copy (git submodule)of the Pagedown library from [http://github.com/timmyomahony/pagedown/](http://github.com/timmyomahony/pagedown/).
 
-If you don't like (or are having problems with) PyPi, you can alternatively install: 
+If you don't like (or are having problems with) PyPi, you can alternatively install:
 
  - Via pip from GitHub: `pip install -e git+https://timmyomahony@github.com/timmyomahony/django-pagedown.git#egg=django-pagedown`
- - Manually clone from Github: 
-     - `git clone https://timmyomahony@github.com/timmyomahony/django-pagedown.git`  
+ - Manually clone from Github:
+     - `git clone https://timmyomahony@github.com/timmyomahony/django-pagedown.git`
      - `cd django-pagedown`
      - `git submodule update --init`
 
@@ -37,57 +37,57 @@ To use it in **all** `TextField`'s in you admin form:
 
     from pagedown.widgets import AdminPagedownWidget
     from django.db import models
-    
+
 
     class FooModelAdmin(models.ModelAdmin):
     	formfield_overrides = {
         	models.TextField: {'widget': AdminPagedownWidget },
     	}
-    	
-Alternatively, to only use it on particular fields, first create a form (in `forms.py`): 
 
-    from pagedown.widgets import AdminPagedownWidget 
+Alternatively, to only use it on particular fields, first create a form (in `forms.py`):
+
+    from pagedown.widgets import AdminPagedownWidget
     from django import forms
     from models import FooModel
-	
-	
+
+
     class FooModelForm(forms.ModelForm):
-        a_text_field = forms.CharField(widget=AdminPagedownWidget())		
-        another_text_field = forms.CharField(widget=AdminPagedownWidget())	
-		
+        a_text_field = forms.CharField(widget=AdminPagedownWidget())
+        another_text_field = forms.CharField(widget=AdminPagedownWidget())
+
         class Meta:
 	    model = FooModel
-			
+
 and in your `admin.py`:
 
     from forms import FooModelForm
     from models import FooModel
     from django.contrib import admin
-    
+
 
     class FooModelAdmin(admin.ModelAdmin):
-    	form = FooModelForm   
-    	
+    	form = FooModelForm
+
     admin.site.register(FooModel, FooModelAdmin)
 
 **Outside the Django Admin:**
 
-To use the widget outside of the django admin, first create a form similar to the above but using the basic `PagedownWidget`: 
+To use the widget outside of the django admin, first create a form similar to the above but using the basic `PagedownWidget`:
 
-    from pagedown.widgets import PagedownWidget 
+    from pagedown.widgets import PagedownWidget
     from django import forms
     from models import FooModel
-	
-	
+
+
     class FooModelForm(forms.ModelForm):
-        a_text_field = forms.CharField(widget=PagedownWidget())		
-        another_text_field = forms.CharField(widget=PagedownWidget())	
-		
+        a_text_field = forms.CharField(widget=PagedownWidget())
+        another_text_field = forms.CharField(widget=PagedownWidget())
+
         class Meta:
 	    model = FooModel
 
 
-Then define your urls/views: 
+Then define your urls/views:
 
     from forms import FooModelForm
     from django.views.generic import FormView
@@ -99,7 +99,7 @@ Then define your urls/views:
             form_class=FooModelForm)),
     )
 
-then create the template and load the javascipt and css required to create the editor: 
+then create the template and load the javascipt and css required to create the editor:
 
     <html>
         <head>
@@ -111,7 +111,40 @@ then create the template and load the javascipt and css required to create the e
             </form>
         </body>
     </html>
+    
+---
+
+#### Showing the Preview ####
+
+You can control whether or not to show the dynamically rendered preview box below the pagedown widget in two ways: 
+
+ - **Globally:** by using the `PAGEDOWN_SHOW_PREVIEW` option in your `settings.py` (this is mentioned further down the page). This will enable/disable the preview for *all* pagedown widgets throughout your application. 
  
+
+ - **Per Field:** by supplying a `show_preview` keyword argument when initialising your widget instance in your form. This gives you finer control over which of the fields can make use of the preview when rendering the pagedown widget. Note that this approach will take preference over the `PAGEDOWN_SHOW_PREVIEW` option. 
+  
+  
+    	from pagedown.widgets import PagedownWidget
+    	from django import forms
+    	from models import FooModel
+
+
+		class FooModelForm(forms.ModelForm):
+			a_text_field = forms.CharField(widget=PagedownWidget(show_preview=False))
+        
+        	class Meta:
+    			model = FooModel
+    
+---
+
+#### Options ####
+
+The following options can be added to your default `settings.py` file to control certain aspects of `django-pagedown` :
+
+- `PAGEDOWN_SHOW_PREVIEW`: whether or not to show the dynamic markdown preview below the markdown text area for the pagedown widgets. **Note that this will affect all instances of the pagedown widget throughout your app.** The default is `True`.
+
+---
+
 #### Notes ####
-   	
-* There are two widgets, `AdminPageDownWidget` and `PageDownWidget`. The only difference is that `AdminPageDownWidget` includes extra CSS to make the preview area and input pretty in the django admin. If you are using the editor for your own app, you will need to supply CSS to do this. 
+
+* There are two widgets, `AdminPageDownWidget` and `PageDownWidget`. The only difference is that `AdminPageDownWidget` includes extra CSS to make the preview area and input pretty in the django admin. If you are using the editor for your own app, you will need to supply CSS to do this.
