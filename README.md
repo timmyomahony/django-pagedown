@@ -9,7 +9,7 @@ A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedo
 
 ---
 
-#### Installation ####
+## Installation ##
 
 1. Get the code: `pip install django-pagedown`
 2. Add `pagedown` to your `INSTALLED_APPS`
@@ -27,7 +27,7 @@ If you don't like (or are having problems with) PyPi, you can alternatively inst
 
 ---
 
-#### Usage ####
+## Usage ##
 
 **Inside the Django Admin:**
 
@@ -114,7 +114,7 @@ then create the template and load the javascipt and css required to create the e
     
 ---
 
-#### Showing/Hiding the Preview Box ####
+## Showing/Hiding the Preview Box ##
 
 You can control whether or not to show the dynamically rendered preview box below the pagedown widget in two ways: 
 
@@ -133,7 +133,7 @@ You can control whether or not to show the dynamically rendered preview box belo
     			
 ---
 
-#### Customizing the Widget Template/HTML ####
+## Customizing the Widget Template/HTML ##
 
 If you want to customize the HTML used to render the pagedown widget altogether, you can. There are two ways: 
 
@@ -151,7 +151,7 @@ If you want to customize the HTML used to render the pagedown widget altogether,
     			model = FooModel
 ---
 
-#### Customizing the CSS ####
+## Customizing the CSS ##
 
 If you want to change the CSS used to display the widgets, you also can. Again, there are two ways: 
 
@@ -175,7 +175,7 @@ If you want to change the CSS used to display the widgets, you also can. Again, 
 
 ---
 
-#### Options ####
+## Options ##
 
 The following options can be added to your default `settings.py` file to control certain aspects of `django-pagedown`. Note that changing these will affect **all** instances of the pagedown widget throughout your app.:
 
@@ -185,7 +185,7 @@ The following options can be added to your default `settings.py` file to control
 
 ---
 
-#### Rendering Markdown In Your Template ####
+## Rendering Markdown In Your Template ##
 
 `contrib.markdown` was [depreciated in Django 1.5](https://code.djangoproject.com/ticket/18054) meaning you can no longer use the `markdown` filter in your template by default. 
 
@@ -200,6 +200,6 @@ The following options can be added to your default `settings.py` file to control
 	
 --- 
 
-#### TODO ####
+## TODO ##
 
 - Add support for images uploading or hooks into the likes of `django-filer` etc. 
