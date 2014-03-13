@@ -44,7 +44,7 @@ To use it in **all** `TextField`'s in you admin form:
         	models.TextField: {'widget': AdminPagedownWidget },
     	}
 
-Alternatively, to only use it on particular fields, first create a form (in `forms.py`):
+Alternatively, to only use it on **particular fields**, first create a form (in `forms.py`):
 
     from pagedown.widgets import AdminPagedownWidget
     from django import forms
@@ -177,9 +177,9 @@ If you want to change the CSS used to display the widgets, you also can. Again, 
 
 #### Options ####
 
-The following options can be added to your default `settings.py` file to control certain aspects of `django-pagedown` :
+The following options can be added to your default `settings.py` file to control certain aspects of `django-pagedown`. Note that changing these will affect **all** instances of the pagedown widget throughout your app.:
 
-- `PAGEDOWN_SHOW_PREVIEW` (boolean): whether or not to show the dynamic markdown preview below the markdown text area for the pagedown widgets. **Note that this will affect all instances of the pagedown widget throughout your app.** The default is `True`.
+- `PAGEDOWN_SHOW_PREVIEW` (boolean): whether or not to show the dynamic markdown preview below the markdown text area for the pagedown widgets. The default is `True`.
 - `PAGEDOWN_DEFAULT_TEMPLATE` (string): the template used to render the pagedown widget. The default template is located in `pagedown/widgets/default.html`. 
 - `PAGEDOWN_WIDGET_CSS` (tuple): the path to the CSS file to be used by the pagedown widget. The default path is `pagedown/
 
