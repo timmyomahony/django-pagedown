@@ -114,7 +114,7 @@ then create the template and load the javascipt and css required to create the e
     
 ---
 
-#### Showing the Preview Box ####
+#### Showing/Hiding the Preview Box ####
 
 You can control whether or not to show the dynamically rendered preview box below the pagedown widget in two ways: 
 
