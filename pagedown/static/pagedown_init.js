@@ -17,18 +17,26 @@ DjangoPagedown = (function() {
 
     var createEditor = function(el) {
         if ( isPagedownable(el) ) {
-            var selectors = {
-                input : el.id,
-                button : el.id + "_wmd_button_bar",
-                preview : el.id + "_wmd_preview",
-            };
             if ( ! that.editors.hasOwnProperty(el.id) ) {
+                var selectors = {
+                    input : el.id,
+                    button : el.id + "_wmd_button_bar",
+                    preview : el.id + "_wmd_preview",
+                };
                 that.editors[el.id] = new Markdown.Editor(that.converter, "", selectors);
                 that.editors[el.id].run();
                 return true;
             } else {
                 console.log("Pagedown editor already attached to element: <#" + el.id + ">");
             }
+        }
+        return false;
+    };
+
+    var destroyEditor = function(el) {
+        if ( that.editors.hasOwnProperty(el.id)) {
+            delete that.editors[el.id];
+            return true;
         }
         return false;
     };
@@ -50,6 +58,9 @@ DjangoPagedown = (function() {
         },
         createEditor: function(el) {
             return createEditor(el);
+        },
+        destroyEditor: function(el) {
+            return destroyEditor(el);
         },
     };
 })();
