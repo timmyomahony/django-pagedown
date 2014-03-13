@@ -27,8 +27,10 @@ body
 }
 
 .wmd-preview 
-{ 
-	background-color: white;
+{
+    background-color: #f8f8f8;
+    margin-top: 2px; 
+    padding: 5px;
 }
 
 .wmd-button-row 
