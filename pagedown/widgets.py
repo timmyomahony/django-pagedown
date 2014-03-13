@@ -1,11 +1,12 @@
 from django import forms
-from django.conf import settings
 from django.contrib.admin import widgets as admin_widgets
 from django.forms.widgets import flatatt
 from django.utils.html import conditional_escape
 from django.template.loader import render_to_string
 
 from pagedown import settings as pagedown_settings
+from pagedown.utils import compatible_staticpath
+
 
 try:
     from django.utils.encoding import force_unicode
@@ -13,27 +14,6 @@ except ImportError: #python3
     # https://docs.djangoproject.com/en/1.5/topics/python3/#string-handling
     from django.utils.encoding import force_text as force_unicode
 from django.utils.safestring import mark_safe
-
-
-def compatible_staticpath(path):
-    '''
-    Try to return a path compatible all the way back to Django 1.2. If anyone
-    has a cleaner or better way to do this let me know!
-    '''
-    try:
-        from django.contrib.staticfiles.storage import staticfiles_storage
-        return staticfiles_storage.url(path)
-    except ImportError:
-        pass
-    try:
-        return '%s/%s' % (settings.STATIC_URL.rstrip('/'), path)
-    except AttributeError:
-        pass
-    try:
-        return '%s/%s' % (settings.PAGEDOWN_URL.rstrip('/'), path)
-    except AttributeError:
-        pass
-    return '%s/%s' % (settings.MEDIA_URL.rstrip('/'), path)
 
 
 class PagedownWidget(forms.Textarea):
