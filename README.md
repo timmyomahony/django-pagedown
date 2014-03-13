@@ -182,3 +182,18 @@ The following options can be added to your default `settings.py` file to control
 - `PAGEDOWN_SHOW_PREVIEW` (boolean): whether or not to show the dynamic markdown preview below the markdown text area for the pagedown widgets. The default is `True`.
 - `PAGEDOWN_DEFAULT_TEMPLATE` (string): the template used to render the pagedown widget. The default template is located in `pagedown/widgets/default.html`. 
 - `PAGEDOWN_WIDGET_CSS` (tuple): the path to the CSS file to be used by the pagedown widget. The default path is `pagedown/
+
+---
+
+#### Rendeirng Markdown In Your Template ####
+
+`contrib.markdown` was [depreciated in Django 1.5](https://code.djangoproject.com/ticket/18054) meaning you can no longer use the `markdown` filter in your template by default. 
+
+[@wkcd has a good example](https://github.com/timmyomahony/django-pagedown/issues/18#issuecomment-37535535) of how to overcome by installing `django-markdown-deux`: 
+
+	{% extends 'base.html' %}
+	{% load markdown_deux_tags %}
+	
+	...
+	<p>{{ entry.body|markdown }}</p>
+	...
