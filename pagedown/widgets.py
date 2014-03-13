@@ -58,3 +58,6 @@ class AdminPagedownWidget(PagedownWidget, admin_widgets.AdminTextareaWidget):
         css = {
             'all': (compatible_staticpath('admin/css/pagedown.css'),)
         }
+        js = (
+            compatible_staticpath('admin/js/pagedown.js'),
+        )

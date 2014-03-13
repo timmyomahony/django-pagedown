@@ -185,7 +185,7 @@ The following options can be added to your default `settings.py` file to control
 
 ---
 
-#### Rendeirng Markdown In Your Template ####
+#### Rendering Markdown In Your Template ####
 
 `contrib.markdown` was [depreciated in Django 1.5](https://code.djangoproject.com/ticket/18054) meaning you can no longer use the `markdown` filter in your template by default. 
 
