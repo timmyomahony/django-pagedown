@@ -197,3 +197,9 @@ The following options can be added to your default `settings.py` file to control
 	...
 	<p>{{ entry.body|markdown }}</p>
 	...
+	
+--- 
+
+#### TODO ####
+
+- Add support for images uploading or hooks into the likes of `django-filer` etc. 
