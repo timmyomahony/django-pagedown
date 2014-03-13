@@ -151,12 +151,35 @@ If you want to customize the HTML used to render the pagedown widget altogether,
     			model = FooModel
 ---
 
+#### Customizing the CSS ####
+
+If you want to change the CSS used to display the widgets, you also can. Again, there are two ways: 
+
+ - **Globally:** You can specify the CSS files to be included by the widget by providing a tuple of paths via a `PAGEDOWN_WIDGET_CSS` variable in your `settings.py`
+
+		PAGEDOWN_WIDGET_CSS = ("custom/css1.css", "custom/css2.css")
+ 
+- **Per Widget:** by supplying a `css` keyword argument when initialising your widget instance in your form
+
+  
+    	...
+    	
+    	class FooModelForm(forms.ModelForm):
+			foo = forms.CharField(widget=PagedownWidge(css=("custom/css1.css", "custom/css2.css")))
+        
+        	class Meta:
+    			model = FooModel
+
+
+---
+
 #### Options ####
 
 The following options can be added to your default `settings.py` file to control certain aspects of `django-pagedown` :
 
-- `PAGEDOWN_SHOW_PREVIEW`: whether or not to show the dynamic markdown preview below the markdown text area for the pagedown widgets. **Note that this will affect all instances of the pagedown widget throughout your app.** The default is `True`.
-- `PAGEDOWN_DEFAULT_TEMPLATE`: the template used to render the pagedown widget. The default template is located in `pagedown/widgets/default.html`. 
+- `PAGEDOWN_SHOW_PREVIEW` (boolean): whether or not to show the dynamic markdown preview below the markdown text area for the pagedown widgets. **Note that this will affect all instances of the pagedown widget throughout your app.** The default is `True`.
+- `PAGEDOWN_DEFAULT_TEMPLATE` (string): the template used to render the pagedown widget. The default template is located in `pagedown/widgets/default.html`. 
+- `PAGEDOWN_WIDGET_CSS` (tuple): the path to the CSS file to be used by the pagedown widget. The default path is `pagedown/
 
 ---
 
