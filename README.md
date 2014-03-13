@@ -114,27 +114,41 @@ then create the template and load the javascipt and css required to create the e
     
 ---
 
-#### Showing the Preview ####
+#### Showing the Preview Box ####
 
 You can control whether or not to show the dynamically rendered preview box below the pagedown widget in two ways: 
 
  - **Globally:** by using the `PAGEDOWN_SHOW_PREVIEW` option in your `settings.py` (this is mentioned further down the page). This will enable/disable the preview for *all* pagedown widgets throughout your application. 
  
 
- - **Per Field:** by supplying a `show_preview` keyword argument when initialising your widget instance in your form. This gives you finer control over which of the fields can make use of the preview when rendering the pagedown widget. Note that this approach will take preference over the `PAGEDOWN_SHOW_PREVIEW` option. 
+ - **Per Widget:** by supplying a `show_preview` keyword argument when initialising your widget instance in your form. This gives you finer control over which of the fields can make use of the preview when rendering the pagedown widget. Note that this approach will take preference over the `PAGEDOWN_SHOW_PREVIEW` option. 
   
-  
-    	from pagedown.widgets import PagedownWidget
-    	from django import forms
-    	from models import FooModel
-
+		...
 
 		class FooModelForm(forms.ModelForm):
-			a_text_field = forms.CharField(widget=PagedownWidget(show_preview=False))
+			foo = forms.CharField(widget=PagedownWidget(show_preview=False))
         
         	class Meta:
     			model = FooModel
-    
+    			
+---
+
+#### Customizing the Widget Template/HTML ####
+
+If you want to customize the HTML used to render the pagedown widget altogether, you can. There are two ways: 
+
+- **Globally:** by default, the template used to render the pagedown widget is located at `pagedown/widgets/default.html`.  
+  - You can override this template by creating `pagedown/widgets/default.html` within your own template directory. This will take preference if you are using Django's default template loading system
+  - You can use the `PAGEDOWN_DEFAULT_TEMPLATE` settings to point to a different template file
+- **Per Widget:** by supplying a `template` keyword argument when initialising your widget instance in your form. This should be the path to the template you wish to use to render this instance. 
+  
+    	...
+    	
+    	class FooModelForm(forms.ModelForm):
+			foo = forms.CharField(widget=PagedownWidge(template="path/to/template.html"))
+        
+        	class Meta:
+    			model = FooModel
 ---
 
 #### Options ####
@@ -142,6 +156,7 @@ You can control whether or not to show the dynamically rendered preview box belo
 The following options can be added to your default `settings.py` file to control certain aspects of `django-pagedown` :
 
 - `PAGEDOWN_SHOW_PREVIEW`: whether or not to show the dynamic markdown preview below the markdown text area for the pagedown widgets. **Note that this will affect all instances of the pagedown widget throughout your app.** The default is `True`.
+- `PAGEDOWN_DEFAULT_TEMPLATE`: the template used to render the pagedown widget. The default template is located in `pagedown/widgets/default.html`. 
 
 ---
 

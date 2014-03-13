@@ -48,6 +48,7 @@ class PagedownWidget(forms.Textarea):
 
     def __init__(self, *args, **kwargs):
         self.show_preview = kwargs.pop('show_preview', pagedown_settings.SHOW_PREVIEW)
+        self.template = kwargs.pop('template', pagedown_settings.WIDGET_TEMPLATE)
         super(PagedownWidget, self).__init__(*args, **kwargs)
 
     def render(self, name, value, attrs=None):
@@ -57,7 +58,7 @@ class PagedownWidget(forms.Textarea):
             attrs['class'] = ""
         attrs['class'] += " wmd-input"
         final_attrs = self.build_attrs(attrs, name=name)
-        rendered_html = render_to_string('pagedown/widget.html', {
+        rendered_html = render_to_string(self.template, {
             'attrs': flatatt(final_attrs),
             'body': conditional_escape(force_unicode(value)),
             'id': final_attrs['id'],
