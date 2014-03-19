@@ -3,5 +3,5 @@ include *.md
 include pagedown/static/admin/css/pagedown.css
 include pagedown/static/admin/js/pagedown.js
 include pagedown/static/pagedown_init.js
-include pagedown/template/pagedown/widgets/default.html
+include pagedown/templates/pagedown/widgets/default.html
 recursive-include pagedown/static/pagedown *.js *.png *.txt *.html *.css
