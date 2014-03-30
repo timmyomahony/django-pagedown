@@ -33,7 +33,7 @@ If you don't like (or are having problems with) PyPi, you can alternatively inst
 
 If you want to use the pagedown editor in a django admin field, there are numerous possible approaches:
 
-To use it in **all** `TextField`'s in you admin form:
+To use it in **all** `TextField`'s in your admin form:
 
     from pagedown.widgets import AdminPagedownWidget
     from django.db import models
@@ -56,7 +56,7 @@ Alternatively, to only use it on **particular fields**, first create a form (in 
         another_text_field = forms.CharField(widget=AdminPagedownWidget())
 
         class Meta:
-	    model = FooModel
+            model = FooModel
 
 and in your `admin.py`:
 
