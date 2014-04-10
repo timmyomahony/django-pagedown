@@ -27,7 +27,7 @@ class PagedownWidget(forms.Textarea):
     def _media(self):
         return forms.Media(
             css={
-                'all': compatible_staticpath(self.css)
+                'all': (compatible_staticpath(self.css[0]),)
             },
             js=(
                 compatible_staticpath('pagedown/Markdown.Converter.js'),
