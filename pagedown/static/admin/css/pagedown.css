@@ -10,6 +10,7 @@
 }
 .wmd-input{
     background-color: white;
+    font-family: monospace;
 }
 .wmd-preview{
     margin-top: 15px;
