@@ -5,26 +5,6 @@ from distutils.command.build import build
 from setuptools.command.develop import develop
 
 
-def get_submodules():
-    if path.exists('.git'):
-        check_call(['rm', '-rf', 'pagedown/static/pagedown'])
-        check_call(['git', 'reset', '--hard'])
-        check_call(['git', 'submodule', 'init'])
-        check_call(['git', 'submodule', 'update'])
-
-
-class build_with_submodules(build):
-    def run(self):
-        get_submodules()
-        build.run(self)
-
-
-class develop_with_submodules(develop):
-    def run(self):
-        get_submodules()
-        develop.run(self)
-
-
 setup(
   name="django-pagedown",
   version="0.1.0",
@@ -39,5 +19,5 @@ setup(
     "Django >= 1.3",
   ],
   license='LICENSE.txt',
-  cmdclass={"build": build_with_submodules, "develop": develop_with_submodules},
+  cmdclass={"build": build, "develop": develop},
 )
