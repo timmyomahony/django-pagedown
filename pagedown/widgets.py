@@ -27,13 +27,16 @@ class PagedownWidget(forms.Textarea):
     def _media(self):
         return forms.Media(
             css={
-                'all': self.css
+                'all': self.css + ('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.min.css',)
             },
             js=(
-                compatible_staticpath('pagedown/Markdown.Converter.js'),
-                compatible_staticpath('pagedown/Markdown.Sanitizer.js'),
-                compatible_staticpath('pagedown/Markdown.Editor.js'),
-                compatible_staticpath('pagedown_init.js'),
+                compatible_staticpath('pagedown/js/Markdown.Converter.js'),
+                compatible_staticpath('pagedown/js/Markdown.Sanitizer.js'),
+                compatible_staticpath('pagedown/js/Markdown.Editor.js'),
+                compatible_staticpath('pagedown/js/djquery_init.js'), #Sets jquery namespace back to $
+                '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js',
+                compatible_staticpath('pagedown/js/jquery.ajaxfileupload.js'),
+                compatible_staticpath('pagedown/js/pagedown_init.js'),
             ))
     media = property(_media)
 
@@ -56,8 +59,8 @@ class PagedownWidget(forms.Textarea):
 class AdminPagedownWidget(PagedownWidget, admin_widgets.AdminTextareaWidget):
     class Media:
         css = {
-            'all': (compatible_staticpath('admin/css/pagedown.css'),)
+            'all': (compatible_staticpath('pagedown/css/pagedown.css'),)
         }
         js = (
-            compatible_staticpath('admin/js/pagedown.js'),
+            compatible_staticpath('pagedown/js/pagedown.js'),
         )
