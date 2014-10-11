@@ -142,3 +142,16 @@
 .inline-related .wmd-input {
     height: 150px;
 }
+
+/* Image Dialog */
+.loading-small { width: 16px; height: 16px;
+                 display: inline-block; }
+#insertImageDialog { display:none; padding: 10px; }
+#insertImageDialog h4 { margin-bottom: 10px; }
+#insertImageDialog input[type=text] { width: 260px; }
+#insertImageDialog .loading-small { display:none; float: left; padding-right: 5px; }
+
+/* HACK Remove background overlay TODO:Z index Fix promt background appearing above overlay */
+.wmd-prompt-background{
+    display:none;
+}

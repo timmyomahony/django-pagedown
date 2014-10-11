@@ -203,3 +203,4 @@ The following options can be added to your default `settings.py` file to control
 ## TODO ##
 
 - Add support for images uploading or hooks into the likes of `django-filer` etc. 
+- UPDATE Basic image upload functonality

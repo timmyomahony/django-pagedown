@@ -7,3 +7,15 @@
         <div id="{{ id|safe }}_wmd_preview" class="wmd-panel wmd-preview"></div>
     {% endif %}
 </div>
+<div id="insertImageDialog" title="Insert Image">
+    <h4>
+        From the web</h4>
+    <p>
+        <input type="text" placeholder="Enter url e.g. http://yoursite.com/image.jpg" />
+    </p>
+    <h4>
+        From your computer</h4>
+    <span class="loading-small"></span>
+    <input type="file" name="file" id="file" data-action="{% url 'pagedown_upload' %}"/>
+
+</div>
