@@ -44,13 +44,12 @@ class PagedownWidget(forms.Textarea):
             attrs['class'] = ""
         attrs['class'] += " wmd-input"
         final_attrs = self.build_attrs(attrs, name=name)
-        return render_to_string(self.template, {
+        return mark_safe(render_to_string(self.template, {
             'attrs': flatatt(final_attrs),
             'body': conditional_escape(force_unicode(value)),
             'id': final_attrs['id'],
             'show_preview': self.show_preview,
-        })
-
+        }))
 
 
 class AdminPagedownWidget(PagedownWidget, admin_widgets.AdminTextareaWidget):
