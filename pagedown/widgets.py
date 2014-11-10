@@ -13,7 +13,6 @@ try:
 except ImportError: #python3
     # https://docs.djangoproject.com/en/1.5/topics/python3/#string-handling
     from django.utils.encoding import force_text as force_unicode
-from django.utils.safestring import mark_safe
 
 
 class PagedownWidget(forms.Textarea):
@@ -40,17 +39,16 @@ class PagedownWidget(forms.Textarea):
     def render(self, name, value, attrs=None):
         if value is None:
             value = ''
-        if 'class' not in attrs:
-            attrs['class'] = ""
-        attrs['class'] += " wmd-input"
         final_attrs = self.build_attrs(attrs, name=name)
+        if 'class' not in final_attrs:
+            final_attrs['class'] = ""
+        final_attrs['class'] += " wmd-input"
         return render_to_string(self.template, {
             'attrs': flatatt(final_attrs),
             'body': conditional_escape(force_unicode(value)),
             'id': final_attrs['id'],
             'show_preview': self.show_preview,
         })
-
 
 
 class AdminPagedownWidget(PagedownWidget, admin_widgets.AdminTextareaWidget):
