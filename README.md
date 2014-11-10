@@ -27,6 +27,12 @@ If you don't like (or are having problems with) PyPi, you can alternatively inst
 
 ---
 
+## Markdown Safety ##
+
+Remember that this library doesn't render your markdown for you outside of the admin widget nor does it do any internal sanitization. Markdown can accept any valid HTML so you have to be careful and make sure you are rendering the output of any untrusted input safely (with `django-markdown-deux` for example), otherwise you could have users embedding scripts in your pagedown text areas
+
+---
+
 ## Usage ##
 
 **Inside the Django Admin:**
