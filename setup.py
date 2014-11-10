@@ -40,4 +40,5 @@ setup(
   ],
   license='LICENSE.txt',
   cmdclass={"build": build_with_submodules, "develop": develop_with_submodules},
+  zip_safe=False,
 )
