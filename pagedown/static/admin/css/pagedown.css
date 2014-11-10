@@ -89,8 +89,8 @@
 }
 /* Block code */
 .wmd-preview pre code {
-    background-color: none;
-    border; 0;
+    background-color: transparent;
+    border: 0;
     line-height: 1.5em;
 
     margin: 0;
