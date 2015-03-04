@@ -21,6 +21,7 @@ class PagedownWidget(forms.Textarea):
         self.show_preview = kwargs.pop('show_preview', pagedown_settings.SHOW_PREVIEW)
         self.template = kwargs.pop('template', pagedown_settings.WIDGET_TEMPLATE)
         self.css = kwargs.pop('css', pagedown_settings.WIDGET_CSS)
+        self.extensions = kwargs.pop('extensions', pagedown_settings.EXTENSIONS)
         super(PagedownWidget, self).__init__(*args, **kwargs)
 
     def _media(self):
@@ -29,9 +30,10 @@ class PagedownWidget(forms.Textarea):
                 'all': self.css
             },
             js=(
-                compatible_staticpath('pagedown/Markdown.Converter.js'),
+                compatible_staticpath('pagedown-extra/pagedown/Markdown.Converter.js'),
                 compatible_staticpath('pagedown/Markdown.Sanitizer.js'),
                 compatible_staticpath('pagedown/Markdown.Editor.js'),
+                compatible_staticpath('pagedown-extra/Markdown.Extra.js'),
                 compatible_staticpath('pagedown_init.js'),
             ))
     media = property(_media)

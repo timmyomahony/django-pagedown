@@ -1,3 +1,6 @@
+[submodule "pagedown/static/pagedown-extra"]
+	path = pagedown/static/pagedown-extra
+	url = git://github.com/jmcmanus/pagedown-extra.git
 [submodule "pagedown/static/pagedown"]
 	path = pagedown/static/pagedown
-	url = git://github.com/timmyomahony/pagedown.git
+	url = git@github.com:timmyomahony/pagedown.git
