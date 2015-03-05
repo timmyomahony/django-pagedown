@@ -43,6 +43,9 @@ DjangoPagedown = (function() {
 
     var init = function() {
         that.converter = Markdown.getSanitizingConverter();
+        Markdown.Extra.init(that.converter, {
+            extensions: "all"
+        });
         that.elements = document.getElementsByTagName("textarea");
         that.editors = {};
         for (var i = 0; i < that.elements.length; ++i){
