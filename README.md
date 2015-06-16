@@ -151,7 +151,7 @@ If you want to customize the HTML used to render the pagedown widget altogether,
     	...
     	
     	class FooModelForm(forms.ModelForm):
-			foo = forms.CharField(widget=PagedownWidge(template="path/to/template.html"))
+			foo = forms.CharField(widget=PagedownWidget(template="path/to/template.html"))
         
         	class Meta:
     			model = FooModel
@@ -173,7 +173,7 @@ If you want to change the CSS used to display the widgets, you also can. Again, 
     	...
     	
     	class FooModelForm(forms.ModelForm):
-			foo = forms.CharField(widget=PagedownWidge(css=("custom/css1.css", "custom/css2.css")))
+			foo = forms.CharField(widget=PagedownWidget(css=("custom/css1.css", "custom/css2.css")))
         
         	class Meta:
     			model = FooModel
