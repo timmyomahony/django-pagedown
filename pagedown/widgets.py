@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.admin import widgets as admin_widgets
 from django.forms.widgets import flatatt
 from django.utils.html import conditional_escape
-from django.template.loader import render_to_string
+from django.template import Context, loader
 
 from pagedown import settings as pagedown_settings
 from pagedown.utils import compatible_staticpath
@@ -43,12 +43,14 @@ class PagedownWidget(forms.Textarea):
         if "class" not in final_attrs:
             final_attrs["class"] = ""
         final_attrs["class"] += " wmd-input"
-        return render_to_string(self.template, {
+        template = loader.get_template(self.template)
+        context = Context({
             "attrs": flatatt(final_attrs),
             "body": conditional_escape(force_unicode(value)),
             "id": final_attrs["id"],
             "show_preview": self.show_preview,
         })
+        return template.render(context)
 
 
 class AdminPagedownWidget(PagedownWidget, admin_widgets.AdminTextareaWidget):
