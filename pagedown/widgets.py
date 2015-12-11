@@ -10,7 +10,7 @@ from pagedown.utils import compatible_staticpath
 
 try:
     from django.utils.encoding import force_unicode
-except ImportError: #python3
+except ImportError:  # python3
     # https://docs.djangoproject.com/en/1.5/topics/python3/#string-handling
     from django.utils.encoding import force_text as force_unicode
 
