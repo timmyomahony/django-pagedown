@@ -26,19 +26,19 @@ class develop_with_submodules(develop):
 
 
 setup(
-  name="django-pagedown",
-  version="0.1.0",
-  author="Timmy O'Mahony",
-  author_email="hey@timmyomahony.com",
-  url="https://github.com/timmyomahony/django-pagedown",
-  description=("A django app that allows the easy addition of Stack Overflow's 'PageDown' markdown editor to a django form field"),
-  long_description=open('README.md').read(),
-  packages=['pagedown'],
-  include_package_data=True,
-  install_requires=[
-    "Django >= 1.3",
-  ],
-  license='LICENSE.txt',
-  cmdclass={"build": build_with_submodules, "develop": develop_with_submodules},
-  zip_safe=False,
+    name="django-pagedown",
+    version="0.1.0",
+    author="Timmy O'Mahony",
+    author_email="hey@timmyomahony.com",
+    url="https://github.com/timmyomahony/django-pagedown",
+    description=("A django app that allows the easy addition of Stack Overflow's 'PageDown' markdown editor to a django form field"),
+    long_description=open('README.md').read(),
+    packages=['pagedown'],
+    include_package_data=True,
+    install_requires=[
+        "Django >= 1.3",
+    ],
+    license='LICENSE.txt',
+    cmdclass={"build": build_with_submodules, "develop": develop_with_submodules},
+    zip_safe=False,
 )
