@@ -3,11 +3,7 @@ Django Pagedown
 
 A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedown&quot; Markdown editor](http://code.google.com/p/pagedown/) to a django form field, whether in a custom app or the Django Admin
 
----
-
 ![Screenshot of Django Admin with Pagedown initialised](https://github.com/timmyomahony/django-pagedown/blob/master/django-pagedown-screenshot.png?raw=true "A screenshot of Pagedown in Django's admin")
-
----
 
 ## Installation
 
@@ -27,13 +23,9 @@ If you don't like PyPi (or are having problems with it) you can manually install
      - `cd django-pagedown`
      - `git submodule update --init`
 
----
-
 ## Markdown Safety
 
 Remember that this library doesn't render your markdown for you outside of the admin widget nor does it do any internal sanitization. Markdown can accept any valid HTML so you have to be careful and make sure you are rendering the output of any untrusted input safely (with [`django-markdown-deux`](https://github.com/trentm/django-markdown-deux) for example), otherwise you could have users embedding scripts in your pagedown text areas
-
----
 
 ## Usage
 
@@ -129,8 +121,6 @@ then create the template and load the javascipt and css required to create the e
 </html>
 ```
 
----
-
 ## Showing/Hiding the Preview Box
 
 You can control whether or not to show the dynamically rendered preview box below the pagedown widget in two ways: 
@@ -148,7 +138,6 @@ You can control whether or not to show the dynamically rendered preview box belo
         class Meta:
             model = FooModel
     ```		
----
 
 ## Customizing the Widget Template/HTML
 
@@ -168,8 +157,6 @@ If you want to customize the HTML used to render the pagedown widget altogether,
         class Meta:
             model = FooModel
     ```
-
----
 
 ## Customizing the CSS
 
@@ -193,8 +180,6 @@ If you want to change the CSS used to display the widgets, you also can. Again, 
             model = FooModel
     ```
 
----
-
 ## Options
 
 The following options can be added to your default `settings.py` file to control certain aspects of `django-pagedown`. Note that changing these will affect **all** instances of the pagedown widget throughout your app.:
@@ -202,8 +187,6 @@ The following options can be added to your default `settings.py` file to control
 - `PAGEDOWN_SHOW_PREVIEW` (boolean): whether or not to show the dynamic markdown preview below the markdown text area for the pagedown widgets. The default is `True`.
 - `PAGEDOWN_WIDGET_TEMPLATE` (string): the template used to render the pagedown widget. The default template is located in `pagedown/widgets/default.html`. 
 - `PAGEDOWN_WIDGET_CSS` (tuple): the path to the CSS file to be used by the pagedown widget. The default path is `pagedown/
-
----
 
 ## Rendering Markdown In Your Template
 
@@ -219,8 +202,6 @@ The following options can be added to your default `settings.py` file to control
 <p>{{ entry.body|markdown }}</p>
 ...
 ```
-
---- 
 
 ## TODO
 
