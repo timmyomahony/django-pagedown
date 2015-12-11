@@ -30,8 +30,10 @@ class PagedownWidget(forms.Textarea):
             },
             js=(
                 compatible_staticpath("pagedown/Markdown.Converter.js"),
+                compatible_staticpath('pagedown-extra/pagedown/Markdown.Converter.js'),
                 compatible_staticpath("pagedown/Markdown.Sanitizer.js"),
                 compatible_staticpath("pagedown/Markdown.Editor.js"),
+                compatible_staticpath('pagedown-extra/Markdown.Extra.js'),
                 compatible_staticpath("pagedown_init.js"),
             ))
     media = property(_media)

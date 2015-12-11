@@ -8,9 +8,9 @@ from setuptools.command.develop import develop
 def get_submodules():
     if path.exists('.git'):
         check_call(['rm', '-rf', 'pagedown/static/pagedown'])
+        check_call(['rm', '-rf', 'pagedown/static/pagedown-extra'])
         check_call(['git', 'reset', '--hard'])
-        check_call(['git', 'submodule', 'init'])
-        check_call(['git', 'submodule', 'update'])
+        check_call(['git', 'submodule', 'update', '--init', '--recursive'])
 
 
 class build_with_submodules(build):
@@ -27,7 +27,7 @@ class develop_with_submodules(develop):
 
 setup(
     name="django-pagedown",
-    version="0.1.0",
+    version="0.1.2",
     author="Timmy O'Mahony",
     author_email="hey@timmyomahony.com",
     url="https://github.com/timmyomahony/django-pagedown",
