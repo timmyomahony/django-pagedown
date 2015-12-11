@@ -9,8 +9,8 @@ def compatible_staticpath(path):
     '''
     try:
         # >= 1.4
-        from django.contrib.staticfiles.storage import staticfiles_storage
-        return staticfiles_storage.url(path)
+        from django.templatetags.static import static
+        return static(path)
     except ImportError:
         pass
     try:
