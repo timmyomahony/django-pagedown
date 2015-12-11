@@ -155,7 +155,7 @@ If you want to customize the HTML used to render the pagedown widget altogether,
 
 - **Globally:** by default, the template used to render the pagedown widget is located at `pagedown/widgets/default.html`.  
   - You can override this template by creating `pagedown/widgets/default.html` within your own template directory. This will take preference if you are using Django's default template loading system
-  - You can use the `PAGEDOWN_DEFAULT_TEMPLATE` settings to point to a different template file
+  - You can use the `PAGEDOWN_WIDGET_TEMPLATE` settings to point to a different template file
 - **Per Widget:** by supplying a `template` keyword argument when initialising your widget instance in your form. This should be the path to the template you wish to use to render this instance. 
 
     ```python  
@@ -199,7 +199,7 @@ If you want to change the CSS used to display the widgets, you also can. Again, 
 The following options can be added to your default `settings.py` file to control certain aspects of `django-pagedown`. Note that changing these will affect **all** instances of the pagedown widget throughout your app.:
 
 - `PAGEDOWN_SHOW_PREVIEW` (boolean): whether or not to show the dynamic markdown preview below the markdown text area for the pagedown widgets. The default is `True`.
-- `PAGEDOWN_DEFAULT_TEMPLATE` (string): the template used to render the pagedown widget. The default template is located in `pagedown/widgets/default.html`. 
+- `PAGEDOWN_WIDGET_TEMPLATE` (string): the template used to render the pagedown widget. The default template is located in `pagedown/widgets/default.html`. 
 - `PAGEDOWN_WIDGET_CSS` (tuple): the path to the CSS file to be used by the pagedown widget. The default path is `pagedown/
 
 ---
