@@ -37,53 +37,54 @@ Remember that this library doesn't render your markdown for you outside of the a
 
 ## Usage
 
-**Inside the Django Admin:**
+The widget can be used both inside the django admin or independendly. 
+
+####Inside the Django Admin:
 
 If you want to use the pagedown editor in a django admin field, there are numerous possible approaches:
 
-To use it in **all** `TextField`'s in your admin form:
+- To use it in **all** `TextField`'s in your admin form:
 
-```python
-from pagedown.widgets import AdminPagedownWidget
-from django.db import models
-
-
-class FooModelAdmin(models.ModelAdmin):
-    formfield_overrides = {
-        models.TextField: {'widget': AdminPagedownWidget },
-    }
-```
-
-Alternatively, to only use it on **particular fields**, first create a form (in `forms.py`):
-
-```python
-from pagedown.widgets import AdminPagedownWidget
-from django import forms
-from models import FooModel
-
-class FooModelForm(forms.ModelForm):
-    a_text_field = forms.CharField(widget=AdminPagedownWidget())
-    another_text_field = forms.CharField(widget=AdminPagedownWidget())
-
-    class Meta:
-        model = FooModel
-```
-
-and in your `admin.py`:
-
-```python
-from forms import FooModelForm
-from models import FooModel
-from django.contrib import admin
+    ```python
+    from pagedown.widgets import AdminPagedownWidget
+    from django.db import models
 
 
-class FooModelAdmin(admin.ModelAdmin):
-    form = FooModelForm
+    class FooModelAdmin(models.ModelAdmin):
+        formfield_overrides = {
+            models.TextField: {'widget': AdminPagedownWidget },
+        }
+    ```
+- To only use it on **particular fields**, first create a form (in `forms.py`):
 
-    admin.site.register(FooModel, FooModelAdmin)
-```
+    ```python
+    from pagedown.widgets import AdminPagedownWidget
+    from django import forms
+    from models import FooModel
 
-**Outside the Django Admin:**
+    class FooModelForm(forms.ModelForm):
+        a_text_field = forms.CharField(widget=AdminPagedownWidget())
+        another_text_field = forms.CharField(widget=AdminPagedownWidget())
+
+        class Meta:
+            model = FooModel
+    ```
+
+    and in your `admin.py`:
+
+    ```python
+    from forms import FooModelForm
+    from models import FooModel
+    from django.contrib import admin
+
+
+    class FooModelAdmin(admin.ModelAdmin):
+        form = FooModelForm
+
+        admin.site.register(FooModel, FooModelAdmin)
+    ```
+
+#### Outside the Django Admin:
 
 To use the widget outside of the django admin, first create a form similar to the above but using the basic `PagedownWidget`:
 
