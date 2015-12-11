@@ -5,3 +5,6 @@ include pagedown/static/admin/js/pagedown.js
 include pagedown/static/pagedown_init.js
 include pagedown/templates/pagedown/widgets/default.html
 recursive-include pagedown/static/pagedown *.js *.png *.txt *.html *.css
+
+include pagedown/static/pagedown-extra/Markdown.Extra.js
+include pagedown/static/pagedown-extra/pagedown/Markdown.Converter.js
