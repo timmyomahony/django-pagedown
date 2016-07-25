@@ -1,4 +1,4 @@
-from django import forms
+from django import VERSION, forms
 from django.contrib.admin import widgets as admin_widgets
 from django.forms.widgets import flatatt
 from django.utils.html import conditional_escape
@@ -46,12 +46,16 @@ class PagedownWidget(forms.Textarea):
             final_attrs["class"] = ""
         final_attrs["class"] += " wmd-input"
         template = loader.get_template(self.template)
-        context = Context({
+        
+        # Compatibility fix:
+        # see https://github.com/timmyomahony/django-pagedown/issues/42
+        context = {
             "attrs": flatatt(final_attrs),
             "body": conditional_escape(force_unicode(value)),
             "id": final_attrs["id"],
             "show_preview": self.show_preview,
-        })
+        }
+        context = Context(context) if VERSION < (1, 9) else context
         return template.render(context)
 
 
