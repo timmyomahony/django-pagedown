@@ -75,7 +75,7 @@ If you want to use the pagedown editor in a django admin field, there are numero
     class FooModelAdmin(admin.ModelAdmin):
         form = FooModelForm
 
-        admin.site.register(FooModel, FooModelAdmin)
+    admin.site.register(FooModel, FooModelAdmin)
     ```
 
 #### Outside the Django Admin:
