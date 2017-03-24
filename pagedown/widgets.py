@@ -1,6 +1,9 @@
 from django import VERSION, forms
 from django.contrib.admin import widgets as admin_widgets
-from django.forms.widgets import flatatt
+try:
+    from django.forms.utils import flatatt
+except ImportError:
+    from django.forms.util import flatatt # <1.7
 from django.utils.html import conditional_escape
 from django.template import Context, loader
 
