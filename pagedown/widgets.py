@@ -44,7 +44,11 @@ class PagedownWidget(forms.Textarea):
     def render(self, name, value, attrs=None):
         if value is None:
             value = ""
-        final_attrs = self.build_attrs(attrs, name=name)
+        if VERSION < (1, 11):
+            final_attrs = self.build_attrs(attrs, name=name)
+        else:
+            final_attrs = self.build_attrs(attrs, {'name': name})
+
         if "class" not in final_attrs:
             final_attrs["class"] = ""
         final_attrs["class"] += " wmd-input"
