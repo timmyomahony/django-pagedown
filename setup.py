@@ -27,7 +27,7 @@ class develop_with_submodules(develop):
 
 setup(
     name="django-pagedown",
-    version="0.1.2",
+    version="0.1.3",
     author="Timmy O'Mahony",
     author_email="hey@timmyomahony.com",
     url="https://github.com/timmyomahony/django-pagedown",
