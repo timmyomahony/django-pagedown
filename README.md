@@ -1,5 +1,6 @@
 Django Pagedown
 ===============
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/timmyomahony/django-pagedown?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedown&quot; Markdown editor](http://code.google.com/p/pagedown/) to a django form field, whether in a custom app or the Django Admin
 
