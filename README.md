@@ -31,7 +31,7 @@ Remember that this library doesn't render your markdown for you outside of the a
 
 The widget can be used both inside the django admin or independendly. 
 
-####Inside the Django Admin:
+#### Inside the Django Admin:
 
 If you want to use the pagedown editor in a django admin field, there are numerous possible approaches:
 
@@ -44,7 +44,7 @@ If you want to use the pagedown editor in a django admin field, there are numero
     from pagedown.widgets import AdminPagedownWidget
 
 
-    class FooModelAdmin(admin.ModelAdmin):
+    class AlbumAdmin(admin.ModelAdmin):
         formfield_overrides = {
             models.TextField: {'widget': AdminPagedownWidget },
         }
@@ -52,30 +52,34 @@ If you want to use the pagedown editor in a django admin field, there are numero
 - To only use it on **particular fields**, first create a form (in `forms.py`):
 
     ```python
-    from pagedown.widgets import AdminPagedownWidget
     from django import forms
-    from models import FooModel
+    
+    from pagedown.widgets import AdminPagedownWidget
+    
+    from music.models import Album
 
-    class FooModelForm(forms.ModelForm):
-        a_text_field = forms.CharField(widget=AdminPagedownWidget())
-        another_text_field = forms.CharField(widget=AdminPagedownWidget())
+    class AlbumForm(forms.ModelForm):
+        name = forms.CharField(widget=AdminPagedownWidget())
+        description = forms.CharField(widget=AdminPagedownWidget())
 
         class Meta:
-            model = FooModel
+            model = Album
+            fields = "__all__"
     ```
 
     and in your `admin.py`:
 
     ```python
+    from django.contrib import admin
+    
     from forms import FooModelForm
     from models import FooModel
-    from django.contrib import admin
 
-
+    @admin.register(FooModel)
     class FooModelAdmin(admin.ModelAdmin):
         form = FooModelForm
-
-    admin.site.register(FooModel, FooModelAdmin)
+        fields = "__all__"
+        fields = ["name", "description"]
     ```
 
 #### Outside the Django Admin:
@@ -83,29 +87,33 @@ If you want to use the pagedown editor in a django admin field, there are numero
 To use the widget outside of the django admin, first create a form similar to the above but using the basic `PagedownWidget`:
 
 ```python
-from pagedown.widgets import PagedownWidget
 from django import forms
-from models import FooModel
+
+from pagedown.widgets import PagedownWidget
+
+from music.models import Album
 
 
-class FooModelForm(forms.ModelForm):
-    a_text_field = forms.CharField(widget=PagedownWidget())
-    another_text_field = forms.CharField(widget=PagedownWidget())
+class AlbumForm(forms.ModelForm):
+    name = forms.CharField(widget=PagedownWidget())
+    description = forms.CharField(widget=PagedownWidget())
 
     class Meta:
-        model = FooModel
+        model = Album
+        fields = ["name", "description"]
 ```
 
 Then define your urls/views:
 
 ```
-from forms import FooModelForm
 from django.views.generic import FormView
 from django.conf.urls import patterns, url
 
+from music.forms import AlbumForm
+
 urlpatterns = patterns('',
     url(r'^$', FormView.as_view(template_name="baz.html",
-                                form_class=FooModelForm)),)
+                                form_class=AlbumForm)),)
 ```
 
 then create the template and load the javascipt and css required to create the editor:
@@ -132,13 +140,15 @@ You can control whether or not to show the dynamically rendered preview box belo
  - **Per Widget:** by supplying a `show_preview` keyword argument when initialising your widget instance in your form. This gives you finer control over which of the fields can make use of the preview when rendering the pagedown widget. Note that this approach will take preference over the `PAGEDOWN_SHOW_PREVIEW` option. 
 
     ```python
-    ...
+    # ...
 
-    class FooModelForm(forms.ModelForm):
-        foo = forms.CharField(widget=PagedownWidget(show_preview=False))
+    class AlbumForm(forms.ModelForm):
+        # ...
+        description = forms.CharField(widget=PagedownWidget(show_preview=False))
     
         class Meta:
-            model = FooModel
+            model = Album
+            fields = ['description', ]
     ```		
 
 ## Customizing the Widget Template/HTML
@@ -151,13 +161,15 @@ If you want to customize the HTML used to render the pagedown widget altogether,
 - **Per Widget:** by supplying a `template` keyword argument when initialising your widget instance in your form. This should be the path to the template you wish to use to render this instance. 
 
     ```python  
-    ...
+    # ...
 
-    class FooModelForm(forms.ModelForm):
-        foo = forms.CharField(widget=PagedownWidget(template="path/to/template.html"))
+    class AlbumForm(forms.ModelForm):
+        # ...
+        description = forms.CharField(widget=PagedownWidget(template="path/to/template.html"))
         
         class Meta:
-            model = FooModel
+            model = Album
+            fields = ['description', ]
     ```
 
 ## Customizing the CSS
@@ -173,13 +185,15 @@ If you want to change the CSS used to display the widgets, you also can. Again, 
 - **Per Widget:** by supplying a `css` keyword argument when initialising your widget instance in your form
 
     ```python
-    ...
+    # ...
     	
-    class FooModelForm(forms.ModelForm):
-	    foo = forms.CharField(widget=PagedownWidget(css=("custom/css1.css", "custom/css2.css")))
+    class AlbumForm(forms.ModelForm):
+        # ...
+	    description = forms.CharField(widget=PagedownWidget(css=("custom/css1.css", "custom/css2.css")))
     
         class Meta:
-            model = FooModel
+            model = Album
+            fields = ['description', ]
     ```
 
 ## Options
