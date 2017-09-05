@@ -48,6 +48,7 @@ class PagedownWidget(forms.Textarea):
             final_attrs = self.build_attrs(attrs, name=name)
         else:
             final_attrs = self.build_attrs(attrs, {'name': name})
+        final_attrs = self.build_attrs(final_attrs, self.attrs)
 
         if "class" not in final_attrs:
             final_attrs["class"] = ""
