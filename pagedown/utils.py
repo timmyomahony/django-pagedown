@@ -4,7 +4,7 @@ from django.conf import settings
 def compatible_staticpath(path):
     '''
     Try to return a path to static the static files compatible all
-    the way back to Django 1.2. If anyone has a cleaner or better 
+    the way back to Django 1.2. If anyone has a cleaner or better
     way to do this let me know!
     '''
     try:
