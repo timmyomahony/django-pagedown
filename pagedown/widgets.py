@@ -70,10 +70,12 @@ class PagedownWidget(forms.Textarea):
 
 
 class AdminPagedownWidget(PagedownWidget, admin_widgets.AdminTextareaWidget):
-    class Media:
-        css = {
-            "all": (compatible_staticpath("admin/css/pagedown.css"),)
-        }
-        js = (
-            compatible_staticpath("admin/js/pagedown.js"),
-        )
+    def _media(self):
+        return super(AdminPagedownWidget, self).media + forms.Media(
+            css={
+                "all": (compatible_staticpath("admin/css/pagedown.css"),)
+            },
+            js=(
+                compatible_staticpath("admin/js/pagedown.js"),
+            ))
+    media = property(_media)
