@@ -1,20 +1,23 @@
 from django import VERSION, forms
 from django.contrib.admin import widgets as admin_widgets
+from django.utils.html import conditional_escape
+from django.template import Context, loader
+
+# Django 1.7 compatibility
 try:
     from django.forms.utils import flatatt
 except ImportError:
-    from django.forms.util import flatatt # <1.7
-from django.utils.html import conditional_escape
-from django.template import Context, loader
+    from django.forms.util import flatatt
 
 from pagedown import settings as pagedown_settings
 from pagedown.utils import compatible_staticpath
 
 
+# Python 3 compatibility
+# https://docs.djangoproject.com/en/1.5/topics/python3/#string-handling
 try:
     from django.utils.encoding import force_unicode
-except ImportError:  # python3
-    # https://docs.djangoproject.com/en/1.5/topics/python3/#string-handling
+except ImportError:
     from django.utils.encoding import force_text as force_unicode
 
 
@@ -53,7 +56,7 @@ class PagedownWidget(forms.Textarea):
             final_attrs["class"] = ""
         final_attrs["class"] += " wmd-input"
         template = loader.get_template(self.template)
-        
+
         # Compatibility fix:
         # see https://github.com/timmyomahony/django-pagedown/issues/42
         context = {
@@ -67,10 +70,12 @@ class PagedownWidget(forms.Textarea):
 
 
 class AdminPagedownWidget(PagedownWidget, admin_widgets.AdminTextareaWidget):
-    class Media:
-        css = {
-            "all": (compatible_staticpath("admin/css/pagedown.css"),)
-        }
-        js = (
-            compatible_staticpath("admin/js/pagedown.js"),
-        )
+    def _media(self):
+        return super(AdminPagedownWidget, self).media + forms.Media(
+            css={
+                "all": (compatible_staticpath("admin/css/pagedown.css"),)
+            },
+            js=(
+                compatible_staticpath("admin/js/pagedown.js"),
+            ))
+    media = property(_media)
