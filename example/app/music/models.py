@@ -11,7 +11,7 @@ class Album(models.Model):
     '''A music album.'''
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
-    artist = models.ForeignKey(Artist)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
 
 
 class Song(models.Model):
@@ -19,4 +19,4 @@ class Song(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
     lyrics = models.TextField(blank=True)
-    album = models.ForeignKey(Album)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE)
