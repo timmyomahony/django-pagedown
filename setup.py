@@ -27,7 +27,7 @@ class develop_with_submodules(develop):
 
 setup(
     name="django-pagedown",
-    version="1.0.4",
+    version="1.0.5",
     author="Timmy O'Mahony",
     author_email="hey@timmyomahony.com",
     url="https://github.com/timmyomahony/django-pagedown",
@@ -35,10 +35,24 @@ setup(
     long_description=open('README.md').read(),
     packages=['pagedown'],
     include_package_data=True,
+    # _Should_ work back to 1.10 but untested
     install_requires=[
         "Django >= 1.8",
     ],
     license='LICENSE.txt',
     cmdclass={"build": build_with_submodules, "develop": develop_with_submodules},
     zip_safe=False,
+    classifiers=[
+        'Intended Audience :: Developers ',
+        'Topic :: Text Editors',
+        'Framework :: Django :: 1.8',
+        'Framework :: Django :: 1.9',
+        'Framework :: Django :: 2.0',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4'
+    ]
 )
