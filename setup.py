@@ -43,7 +43,7 @@ setup(
     cmdclass={"build": build_with_submodules, "develop": develop_with_submodules},
     zip_safe=False,
     classifiers=[
-        'Intended Audience :: Developers ',
+        'Intended Audience :: Developers',
         'Topic :: Text Editors',
         'Framework :: Django :: 1.8',
         'Framework :: Django :: 1.9',
