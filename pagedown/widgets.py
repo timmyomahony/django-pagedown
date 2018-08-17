@@ -53,7 +53,9 @@ class PagedownWidget(forms.Textarea):
 
         extra_attrs = {
             'name': name
-        }.update(self.attrs)
+        }
+
+        extra_attrs.update(self.attrs)
 
         # Signature for build_attrs changed in 1.11
         # https://code.djangoproject.com/ticket/28095
