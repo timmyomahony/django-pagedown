@@ -48,18 +48,24 @@ class PagedownWidget(forms.Textarea):
     media = property(_media)
 
     def render(self, name, value, attrs=None, renderer=None):
-        # def render(self, name, value, attrs=None):
         if value is None:
             value = ""
-        if VERSION < (1, 11):
-            final_attrs = self.build_attrs(attrs, name=name)
-        else:
-            final_attrs = self.build_attrs(attrs, {'name': name})
-        final_attrs = self.build_attrs(final_attrs, self.attrs)
 
+        extra_attrs = {
+            'name': name
+        }.update(self.attrs)
+
+        # Signature for build_attrs changed in 1.11
+        # https://code.djangoproject.com/ticket/28095
+        if VERSION < (1, 11):
+            final_attrs = self.build_attrs(attrs, **extra_attrs)
+        else:
+            final_attrs = self.build_attrs(attrs, extra_attrs=extra_attrs)
+        
         if "class" not in final_attrs:
             final_attrs["class"] = ""
         final_attrs["class"] += " wmd-input"
+
         template = loader.get_template(self.template)
 
         # Compatibility fix:
