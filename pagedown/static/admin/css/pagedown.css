@@ -36,14 +36,15 @@
     padding: 12px 14px;
     margin: 0;
     background: #f8f8f8;
-    border: 1px solid #eee;
-    border-radius: 4px;
 }
 
 .wmd-preview * {
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif !important;
 }
 
+.wmd-preview *:last-child {
+    margin-bottom: 0;
+}
 
 .wmd-preview a { 
     color: #447e9b;
@@ -95,7 +96,7 @@
 .wmd-preview h6 {
     margin:0 0 12px 0;
     padding: 0;
-    color: #666;
+    color: #333;
     font-weight: bold;
     background: none;
 }
@@ -175,12 +176,11 @@
     word-wrap: break-word;
     margin: 15px 0;
     padding: 10px;
+    color: #333;
     
     margin: 0 0 15px 0;
     padding-left: 1em;
-    border-left: 0.5em #ddd solid;
     background-color: #eee;
-    border-radius: 0 4px 4px 0;
 }
 .wmd-preview pre code {
     background-color: transparent;
