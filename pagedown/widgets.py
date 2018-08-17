@@ -12,7 +12,6 @@ except ImportError:
 from pagedown import settings as pagedown_settings
 from pagedown.utils import compatible_staticpath
 
-
 # Python 3 compatibility
 # https://docs.djangoproject.com/en/1.5/topics/python3/#string-handling
 try:
@@ -45,15 +44,18 @@ class PagedownWidget(forms.Textarea):
                 compatible_staticpath("pagedown-extra/Markdown.Extra.js"),
                 compatible_staticpath("pagedown_init.js"),
             ))
+
     media = property(_media)
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
+        # def render(self, name, value, attrs=None):
         if value is None:
             value = ""
         if VERSION < (1, 11):
             final_attrs = self.build_attrs(attrs, name=name)
         else:
             final_attrs = self.build_attrs(attrs, {'name': name})
+        final_attrs = self.build_attrs(final_attrs, self.attrs)
 
         if "class" not in final_attrs:
             final_attrs["class"] = ""
@@ -81,4 +83,5 @@ class AdminPagedownWidget(PagedownWidget, admin_widgets.AdminTextareaWidget):
             js=(
                 compatible_staticpath("admin/js/pagedown.js"),
             ))
+
     media = property(_media)
