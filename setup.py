@@ -4,6 +4,7 @@ from subprocess import check_call
 from distutils.command.build import build
 from setuptools.command.develop import develop
 
+from pagedown import VERSION
 
 def get_submodules():
     if path.exists('.git'):
@@ -27,7 +28,7 @@ class develop_with_submodules(develop):
 
 setup(
     name="django-pagedown",
-    version="1.0.5",
+    version=".".join(map(str, VERSION)),
     author="Timmy O'Mahony",
     author_email="hey@timmyomahony.com",
     url="https://github.com/timmyomahony/django-pagedown",
