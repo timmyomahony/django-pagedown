@@ -3,23 +3,27 @@
 }
 
 .wmd-panel{
-    margin-left: 0;
+    max-width: 100%;
+    min-width: auto;
+    width: 100%;
+    margin: 0;
 }
 
     .wmd-panel textarea {
         outline: 0;
     }
 
+.wmd-button-bar {
+    background-color: white;
+}
+
 .wmd-button-row{
     margin-left: 0 !important;
 }
 
-.wmd-input{
+.wmd-input {
     background-color: white;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px 6px;
-    margin-top: 0;
 }
 
 .wmd-preview-title {
@@ -29,13 +33,22 @@
 
 .wmd-preview{
     width: 625px;
+    max-width: 100%;
     max-height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     box-sizing: border-box;
     padding: 12px 14px;
-    margin: 0;
+    margin: 10px 0 0 0;
+    border: 1px solid #eee;
+    border-radius: 4px;
     background: #f8f8f8;
+}
+
+@media (max-width: 1024px) {
+    .wmd-preview{
+        max-width: 518px;
+    }
 }
 
 .wmd-preview * {
@@ -127,8 +140,9 @@
 
 .wmd-preview blockquote{
     margin: 0 0 15px 0;
-    padding-left: 1em;
-    border-left: 0.5em #ddd solid;
+    padding: 10px;
+    border-left: 2px #ddd solid;
+    background: #eee;
 }
 
     .wmd-preview blockquote p {
@@ -138,7 +152,7 @@
 
 .wmd-preview hr {
     display: block;
-    height: 0px;
+    height: 0;
     border: 0;
     font-style: italic;
     border-bottom: 1px solid #ddd;
@@ -156,8 +170,8 @@
 
 /* Code inline */
 .wmd-preview code {
-    margin: 0 2px;
-    padding: 0px 5px;
+    margin: 2px;
+    padding: 0px 3px;
     border: 1px solid #ddd;
     background-color: #f8f8f8;
     border-radius: 2px;
@@ -182,6 +196,7 @@
     padding-left: 1em;
     background-color: #eee;
 }
+
 .wmd-preview pre code {
     background-color: transparent;
     border: 0;
@@ -244,6 +259,6 @@
 .wmd-preview td { vertical-align: top; }
 
 /* Inlines */
-.inline-related .wmd-input {
+.inline-related textarea {
     height: 150px;
 }

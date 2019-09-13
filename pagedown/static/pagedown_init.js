@@ -9,21 +9,14 @@ DjangoPagedown = (function() {
     var that = this;
 
     var isPagedownable = function(el) {
-        if ( (' ' + el.className + ' ').indexOf(' wmd-input ') > -1 ) {
-            return true;
-        }
-        return false;
+        return el.id.indexOf('wmd-input') > -1;
     };
 
     var createEditor = function(el) {
-        if ( isPagedownable(el) ) {
-            if ( ! that.editors.hasOwnProperty(el.id) ) {
-                var selectors = {
-                    input : el.id,
-                    button : el.id + "_wmd_button_bar",
-                    preview : el.id + "_wmd_preview",
-                };
-                that.editors[el.id] = new Markdown.Editor(that.converter, "", selectors);
+        if (isPagedownable(el)) {
+            if (! that.editors.hasOwnProperty(el.id)) {
+                var id = el.id.substr(9);
+                that.editors[el.id] = new Markdown.Editor(that.converter, id, {});
                 that.editors[el.id].run();
                 return true;
             } else {
