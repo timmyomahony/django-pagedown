@@ -2,16 +2,22 @@
     display: inline-block;
 }
 
+@media (max-width: 767px) {
+    .wmd-wrapper{
+        width: 100%;
+    }
+}
+
 .wmd-panel{
+    display: flex;
+    flex-direction: column;
+
     max-width: 100%;
     min-width: auto;
     width: 100%;
     margin: 0;
 }
 
-    .wmd-panel textarea {
-        outline: 0;
-    }
 
 .wmd-button-bar {
     background-color: white;
@@ -22,18 +28,20 @@
 }
 
 .wmd-input {
+    width: 100%;
     background-color: white;
     border: 1px solid #ccc;
 }
 
-.wmd-preview-title {
-    margin: 10px 0 5px 0 !important;
-    padding-left: 0px !important;
+@media (max-width: 767px) {
+    .colM .aligned .vLargeTextField.wmd-input {
+        width: 100%;
+    }
 }
 
 .wmd-preview{
-    width: 625px;
-    max-width: 100%;
+    width: 100%;
+
     max-height: 400px;
     overflow-y: auto;
 
@@ -43,12 +51,6 @@
     border: 1px solid #eee;
     border-radius: 4px;
     background: #f8f8f8;
-}
-
-@media (max-width: 1024px) {
-    .wmd-preview{
-        max-width: 518px;
-    }
 }
 
 .wmd-preview * {
