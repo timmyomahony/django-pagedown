@@ -7,17 +7,13 @@ Add [Stack Overflow&#39;s &quot;Pagedown&quot; Markdown editor](https://github.c
 
 ## Requirements
 
-The widget has been vastly simplified so that it's easier to drop-into your projects and easier to customise. Version >= 2.0.0 requires Django 2.1.0 or above.
+Version >= 2.0.0 of `django-pagedown` requires Django 2.1.0 or above (previous versions should support Django all the way back to around 1.1).
 
 ## Installation
 
 1. Get the code: `pip install django-pagedown`
 2. Add `pagedown.apps.PagedownConfig` to your `INSTALLED_APPS`
 3. Collect the static files: `python manage.py collectstatic`
-
-## Markdown Safety
-
-Remember that this library doesn't render your markdown for you outside of the admin widget nor does it do any internal sanitization. Markdown can accept any valid HTML so you have to be careful and make sure you are rendering the output of any untrusted input safely (with [`django-markdown-deux`](https://github.com/trentm/django-markdown-deux) for example), otherwise you could have users embedding scripts in your pagedown text areas
 
 ## Usage
 
@@ -140,7 +136,7 @@ class MyNewWidget(PagedownWidget):
         js = ('custom/javascript.js',)
 ```
 
-## Rendering Markdown In Your Template
+## Rendering Markdown
 
 `contrib.markdown` was [depreciated in Django 1.5](https://code.djangoproject.com/ticket/18054) meaning you can no longer use the `markdown` filter in your template by default. 
 
