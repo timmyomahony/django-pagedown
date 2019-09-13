@@ -1,9 +1,9 @@
 Django Pagedown
 ===============
 
-A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedown&quot; Markdown editor](https://github.com/StackExchange/pagedown/) to a django form field, whether in a custom app or the Django Admin
+Add [Stack Overflow&#39;s &quot;Pagedown&quot; Markdown editor](https://github.com/StackExchange/pagedown/) to your Django Admin or custom form.
 
-![Screenshot of Django Admin with Pagedown initialised](https://github.com/timmyomahony/django-pagedown/blob/master/django-pagedown-screenshot.png?raw=true "A screenshot of Pagedown in Django's admin")
+![Screenshot of Django Admin with Pagedown initialised](https://github.com/timmyomahony/django-pagedown/blob/master/screenshot.png?raw=true "A screenshot of Pagedown in Django's admin")
 
 ## Requirements
 
