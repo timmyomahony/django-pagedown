@@ -1,7 +1,7 @@
 Django Pagedown
 ===============
 
-A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedown&quot; Markdown editor](http://code.google.com/p/pagedown/) to a django form field, whether in a custom app or the Django Admin
+A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedown&quot; Markdown editor](https://github.com/StackExchange/pagedown/) to a django form field, whether in a custom app or the Django Admin
 
 ![Screenshot of Django Admin with Pagedown initialised](https://github.com/timmyomahony/django-pagedown/blob/master/django-pagedown-screenshot.png?raw=true "A screenshot of Pagedown in Django's admin")
 
@@ -10,18 +10,6 @@ A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedo
 1. Get the code: `pip install django-pagedown`
 2. Add `pagedown` to your `INSTALLED_APPS`
 3. Make sure to collect the static files: `python manage.py collectstatic --noinput` (and if you are working in a development environment, make sure [you are properly serving your static files](https://docs.djangoproject.com/en/1.9/howto/static-files/#serving-static-files-during-development))
-
-Note that this package will install a cloned copy (git submodule) of the Pagedown library from [http://github.com/timmyomahony/pagedown/](http://github.com/timmyomahony/pagedown/).
-
-#### Alternative Installation
-
-If you don't like PyPi (or are having problems with it) you can manually install the pacakge:
-
- - via pip from GitHub: `pip install -e git+https://timmyomahony@github.com/timmyomahony/django-pagedown.git#egg=django-pagedown`
- - manually clone from Github:
-     - `git clone https://timmyomahony@github.com/timmyomahony/django-pagedown.git`
-     - `cd django-pagedown`
-     - `git submodule update --init`
 
 ## Markdown Safety
 
@@ -129,26 +117,6 @@ then create the template and load the javascipt and css required to create the e
     </body>
 </html>
 ```
-
-## Showing/Hiding the Preview Box
-
-You can control whether or not to show the dynamically rendered preview box below the pagedown widget in two ways: 
-
- - **Globally:** by using the `PAGEDOWN_SHOW_PREVIEW` option in your `settings.py` (this is mentioned further down the page). This will enable/disable the preview for *all* pagedown widgets throughout your application. 
-
- - **Per Widget:** by supplying a `show_preview` keyword argument when initialising your widget instance in your form. This gives you finer control over which of the fields can make use of the preview when rendering the pagedown widget. Note that this approach will take preference over the `PAGEDOWN_SHOW_PREVIEW` option. 
-
-    ```python
-    # ...
-
-    class AlbumForm(forms.ModelForm):
-        # ...
-        description = forms.CharField(widget=PagedownWidget(show_preview=False))
-    
-        class Meta:
-            model = Album
-            fields = ['description', ]
-    ```		
 
 ## Customizing the Widget Template/HTML
 
