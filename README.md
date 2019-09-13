@@ -5,6 +5,10 @@ A django app that allows the easy addition of [Stack Overflow&#39;s &quot;Pagedo
 
 ![Screenshot of Django Admin with Pagedown initialised](https://github.com/timmyomahony/django-pagedown/blob/master/django-pagedown-screenshot.png?raw=true "A screenshot of Pagedown in Django's admin")
 
+## Requirements
+
+The widget has been vastly simplified so that it's easier to drop-into your projects and easier to customise. Version >= 2.0.0 requires Django 2.1.0 or above.
+
 ## Installation
 
 1. Get the code: `pip install django-pagedown`
@@ -19,7 +23,7 @@ Remember that this library doesn't render your markdown for you outside of the a
 
 The widget can be used both inside the django admin or independendly. 
 
-#### Inside the Django Admin:
+### Inside the Django Admin:
 
 If you want to use the pagedown editor in a django admin field, there are numerous possible approaches:
 
@@ -69,7 +73,7 @@ If you want to use the pagedown editor in a django admin field, there are numero
         fields = "__all__"
     ```
 
-#### Outside the Django Admin:
+### Outside the Django Admin:
 
 To use the widget outside of the django admin, first create a form similar to the above but using the basic `PagedownWidget`:
 
@@ -118,58 +122,23 @@ then create the template and load the javascipt and css required to create the e
 </html>
 ```
 
-## Customizing the Widget Template/HTML
+## Customizing the Widget
 
-If you want to customize the HTML used to render the pagedown widget altogether, you can. There are two ways: 
+If you want to customize the widget, the easiest way is to simply extend it:
 
-- **Globally:** by default, the template used to render the pagedown widget is located at `pagedown/widgets/default.html`.  
-  - You can override this template by creating `pagedown/widgets/default.html` within your own template directory. This will take preference if you are using Django's default template loading system
-  - You can use the `PAGEDOWN_WIDGET_TEMPLATE` settings to point to a different template file
-- **Per Widget:** by supplying a `template` keyword argument when initialising your widget instance in your form. This should be the path to the template you wish to use to render this instance. 
+```py
+from pagedown.widgets import PagedownWidget
 
-    ```python  
-    # ...
 
-    class AlbumForm(forms.ModelForm):
-        # ...
-        description = forms.CharField(widget=PagedownWidget(template="path/to/template.html"))
-        
-        class Meta:
-            model = Album
-            fields = ['description', ]
-    ```
+class MyNewWidget(PagedownWidget):
+    template_name = '/custom/template.html'
 
-## Customizing the CSS
-
-If you want to change the CSS used to display the widgets, you also can. Again, there are two ways: 
-
- - **Globally:** You can specify the CSS files to be included by the widget by providing a tuple of paths via a `PAGEDOWN_WIDGET_CSS` variable in your `settings.py`
-
-		# Import the default pagedown css first, then our custom CSS sheet
-		# to avoid having to specify all the default styles
-		PAGEDOWN_WIDGET_CSS = ('pagedown/demo/browser/demo.css', "pagedown/custom.css",)
- 
-- **Per Widget:** by supplying a `css` keyword argument when initialising your widget instance in your form
-
-    ```python
-    # ...
-    	
-    class AlbumForm(forms.ModelForm):
-        # ...
-	    description = forms.CharField(widget=PagedownWidget(css=("custom/css1.css", "custom/css2.css")))
-    
-        class Meta:
-            model = Album
-            fields = ['description', ]
-    ```
-
-## Options
-
-The following options can be added to your default `settings.py` file to control certain aspects of `django-pagedown`. Note that changing these will affect **all** instances of the pagedown widget throughout your app.:
-
-- `PAGEDOWN_SHOW_PREVIEW` (boolean): whether or not to show the dynamic markdown preview below the markdown text area for the pagedown widgets. The default is `True`.
-- `PAGEDOWN_WIDGET_TEMPLATE` (string): the template used to render the pagedown widget. The default template is located in `pagedown/widgets/default.html`. 
-- `PAGEDOWN_WIDGET_CSS` (tuple): the path to the CSS file to be used by the pagedown widget. The default path is `pagedown/
+    class Media:
+        css = {
+            'all': ('custom/stylesheets.css,)
+        }
+        js = ('custom/javascript.js',)
+```
 
 ## Rendering Markdown In Your Template
 
@@ -185,7 +154,3 @@ The following options can be added to your default `settings.py` file to control
 <p>{{ entry.body|markdown }}</p>
 ...
 ```
-
-## TODO
-
-- Add support for images uploading or hooks into the likes of `django-filer` etc. 
