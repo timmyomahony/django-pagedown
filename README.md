@@ -12,8 +12,8 @@ The widget has been vastly simplified so that it's easier to drop-into your proj
 ## Installation
 
 1. Get the code: `pip install django-pagedown`
-2. Add `pagedown` to your `INSTALLED_APPS`
-3. Make sure to collect the static files: `python manage.py collectstatic --noinput` (and if you are working in a development environment, make sure [you are properly serving your static files](https://docs.djangoproject.com/en/1.9/howto/static-files/#serving-static-files-during-development))
+2. Add `pagedown.apps.PagedownConfig` to your `INSTALLED_APPS`
+3. Collect the static files: `python manage.py collectstatic`
 
 ## Markdown Safety
 
