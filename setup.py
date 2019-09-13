@@ -37,9 +37,9 @@ setup(
     long_description=open('README.md').read(),
     packages=['pagedown'],
     include_package_data=True,
-    # _Should_ work back to 1.10 but untested
+    # _Should_ work back to 1.1 but untested
     install_requires=[
-        "Django >= 1.8",
+        "Django >= 1.11",
     ],
     license='LICENSE.txt',
     cmdclass={"build": build_with_submodules, "develop": develop_with_submodules},
@@ -47,9 +47,9 @@ setup(
     classifiers=[
         'Intended Audience :: Developers',
         'Topic :: Text Editors',
-        'Framework :: Django :: 1.8',
-        'Framework :: Django :: 1.9',
-        'Framework :: Django :: 2.0',
+        'Framework :: Django :: 1.11',
+        'Framework :: Django :: 2.1',
+        'Framework :: Django :: 2.2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
