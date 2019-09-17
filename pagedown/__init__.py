@@ -1,3 +1,3 @@
-VERSION = ('2', '0', '1')
+VERSION = ('2', '0', '3')
 
 default_app_config = 'pagedown.apps.PagedownConfig'
