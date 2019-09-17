@@ -150,3 +150,7 @@ class MyNewWidget(PagedownWidget):
 <p>{{ entry.body|markdown }}</p>
 ...
 ```
+
+## Example
+
+You can see a fully-fledged example of the widget in [`django-pagedown-example`](https://github.com/timmyomahony/django-pagedown-example)
