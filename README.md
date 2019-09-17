@@ -92,7 +92,7 @@ class AlbumForm(forms.ModelForm):
 
 Then define your urls/views:
 
-```
+```py
 from django.views.generic import FormView
 from django.conf.urls import patterns, url
 
@@ -150,3 +150,7 @@ class MyNewWidget(PagedownWidget):
 <p>{{ entry.body|markdown }}</p>
 ...
 ```
+
+## Example
+
+You can see a fully-fledged example of the widget in [`django-pagedown-example`](https://github.com/timmyomahony/django-pagedown-example)

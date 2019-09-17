@@ -12,6 +12,9 @@ class PagedownWidget(forms.Textarea):
             self.attrs.get('class', ''))
 
     class Media:
+        css = {
+            'all': ('pagedown/demo/browser/demo.css',)
+        }
         js = ('pagedown/Markdown.Converter.js',
               'pagedown-extra/pagedown/Markdown.Converter.js',
               'pagedown/Markdown.Sanitizer.js',
