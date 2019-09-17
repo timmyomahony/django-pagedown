@@ -92,7 +92,7 @@ class AlbumForm(forms.ModelForm):
 
 Then define your urls/views:
 
-```
+```py
 from django.views.generic import FormView
 from django.conf.urls import patterns, url
 
