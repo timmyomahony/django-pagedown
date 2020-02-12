@@ -7,14 +7,14 @@ from django.core.files.storage import default_storage
 
 
 IMAGE_UPLOAD_EXTENSIONS = getattr(settings, 'PAGEDOWN_IMAGE_UPLOAD_EXTENSIONS', [
-    '.jpg',
-    '.jpeg',
-    '.png',
-    '.svg',
-    '.webp'
+    'jpg',
+    'jpeg',
+    'png',
+    'svg',
+    'webp'
 ])
 IMAGE_UPLOAD_MAX_SIZE = getattr(
-    settings, 'PAGEDOWN_IMAGE_UPLOAD_MAX_SIZE', 20 * 1024 * 1024)
+    settings, 'PAGEDOWN_IMAGE_UPLOAD_MAX_SIZE', 10 * 1024 * 1024)
 IMAGE_UPLOAD_PATH = getattr(
     settings, 'PAGEDOWN_IMAGE_UPLOAD_PATH', 'pagedown-uploads')
 
@@ -30,9 +30,11 @@ def image_upload_view(request):
     if not file:
         error = 'No file found'
     if not any([file.name.endswith(e) for e in IMAGE_UPLOAD_EXTENSIONS]):
-        error = 'Invalid extension'
+        error = 'Invalid extension (valid extensions: "%s")' % ','.join(
+            IMAGE_UPLOAD_EXTENSIONS)
     if file.size > IMAGE_UPLOAD_MAX_SIZE:
-        error = 'File too large'
+        error = 'File too large (max size %s mb)' % (
+            IMAGE_UPLOAD_MAX_SIZE / 1024 / 1024)
 
     if error:
         return JsonResponse({'success': False, 'error': error})

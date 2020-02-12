@@ -23,51 +23,65 @@ DjangoPagedown = (function() {
         var cancel = upload.getElementsByClassName("deletelink")[0];
         var submit = upload.getElementsByClassName("submit-input")[0];
 
-        var reset = function() {
+        var close = function(value, callback) {
           upload.classList.remove("show");
           url.value = "";
           file.value = "";
-        };
-
-        var uploadFile = function(file, callback) {
-          var data = new FormData();
-          var request = new XMLHttpRequest();
-          data.append("file", file);
-          request.open("POST", "/pagedown/image-upload/", true);
-          request.addEventListener("load", function() {
-            var response = JSON.parse(request.response);
-            if (response.success) {
-              callback(response.url);
-            } else {
-              if (response.error) {
-                alert(response.error);
-              }
-              callback(null);
-            }
-            reset();
-          });
-          request.send(data);
+          callback(value);
         };
 
         editor.hooks.set("insertImageDialog", function(callback) {
           upload.classList.add("show");
-          cancel.addEventListener("click", function() {
-            callback(null);
-            reset();
-            event.preventDefault();
-          });
-          submit.addEventListener("click", function(event) {
-            if (url.value.length > 0) {
-              callback(url.value);
-              reset();
-            } else if (file.files.length > 0) {
-              uploadFile(file.files[0], callback);
-            } else {
-              callback(null);
-              reset();
-            }
-            event.preventDefault();
-          });
+
+          cancel.addEventListener(
+            "click",
+            function(event) {
+              close(null, callback);
+              event.preventDefault();
+            },
+            { once: true }
+          );
+
+          submit.addEventListener(
+            "click",
+            function() {
+              // Regular URL
+              if (url.value.length > 0) {
+                close(url.value, callback);
+              }
+              // File upload
+              else if (file.files.length > 0) {
+                var data = new FormData();
+                var request = new XMLHttpRequest();
+                data.append("file", file.files[0]);
+                request.open("POST", "/pagedown/image-upload/", true);
+                request.addEventListener(
+                  "load",
+                  function() {
+                    var response = JSON.parse(request.response);
+                    if (response.success) {
+                      close(response.url, callback);
+                    } else {
+                      if (response.error) {
+                        alert(response.error);
+                      }
+                      close(null, callback);
+                    }
+                  },
+                  {
+                    once: true
+                  }
+                );
+                request.send(data);
+              } else {
+                // Nothing
+                close(null, callback);
+              }
+              event.preventDefault();
+            },
+            { once: true }
+          );
+
           return true;
         });
       }
