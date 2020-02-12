@@ -9,7 +9,7 @@ DjangoPagedown = (function() {
     extensions: "all"
   });
 
-  var setupEditor = function(element) {
+  var createEditor = function(element) {
     var input = element.getElementsByClassName("wmd-input")[0];
     var id = input.id.substr(9);
     if (!editors.hasOwnProperty(id)) {
@@ -91,16 +91,30 @@ DjangoPagedown = (function() {
     }
   };
 
+  var destroyEditor = function(element) {
+    if (editors.hasOwnProperty(element.id)) {
+      delete editors[el.id];
+      return true;
+    }
+    return false;
+  };
+
   var init = function() {
     elements = document.getElementsByClassName("wmd-wrapper");
     for (var i = 0; i < elements.length; ++i) {
-      setupEditor(elements[i]);
+      createEditor(elements[i]);
     }
   };
 
   return {
     init: function() {
       return init();
+    },
+    createEditor: function(element) {
+      return createEditor(element);
+    },
+    destroyEditor: function(element) {
+      return destroyEditor(element);
     }
   };
 })();
