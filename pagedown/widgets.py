@@ -20,7 +20,8 @@ class PagedownWidget(forms.Textarea):
 
     class Media:
         css = {
-            'all': ('pagedown/demo/browser/demo.css',)
+            'all': ('pagedown/demo/browser/demo.css',
+                    'pagedown.css')
         }
         js = ('pagedown/Markdown.Converter.js',
               'pagedown-extra/pagedown/Markdown.Converter.js',
