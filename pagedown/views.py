@@ -1,5 +1,4 @@
 import os
-from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.conf import settings
@@ -19,7 +18,6 @@ IMAGE_UPLOAD_PATH = getattr(
     settings, 'PAGEDOWN_IMAGE_UPLOAD_PATH', 'pagedown-uploads')
 
 
-@login_required
 @csrf_exempt
 def image_upload_view(request):
     error = False
