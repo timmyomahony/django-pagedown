@@ -151,7 +151,7 @@ class MyNewWidget(PagedownWidget):
 ...
 ```
 
-## Image Upload
+## Image Uploads
 
 You can enable image uploads, allowing your users to upload new images to the server and have them automatically inserted into the Pagedown widget (instead of just adding image URLs):
 
@@ -178,6 +178,8 @@ The following options are available via your settings to tweak how the image upl
 - `PAGEDOWN_IMAGE_UPLOAD_EXTENSIONS` can be used to limit the extensions allowed for upload (default is `jpg`, `jpeg`, `png`, `svg`, `webp`)
 - `PAGEDOWN_IMAGE_UPLOAD_MAX_SIZE` can be used to limit the max size of uploads (default is 10mb)
 - `PAGEDOWN_IMAGE_UPLOAD_PATH` can be used to change the path within your media root (default is `pagedown-uploads`)
+
+Check out the `pagedown_init.js` script to [see how the upload is being performed on the client side](https://github.com/timmyomahony/django-pagedown/blob/master/pagedown/static/pagedown_init.js).
 
 ### Caveats
 
