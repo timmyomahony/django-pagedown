@@ -31,7 +31,7 @@ def image_upload_view(request):
         error = 'Method not allowed'
     if not file:
         error = 'No file found'
-    if not any([file.name.endswith(e) for e in IMAGE_UPLOAD_EXTENSIONS]):
+    if not any([file.name.lower().endswith(e) for e in IMAGE_UPLOAD_EXTENSIONS]):
         error = 'Invalid extension (valid extensions: "%s")' % ','.join(
             IMAGE_UPLOAD_EXTENSIONS)
     if file.size > IMAGE_UPLOAD_MAX_SIZE:
