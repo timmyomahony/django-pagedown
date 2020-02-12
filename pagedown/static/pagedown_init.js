@@ -1,64 +1,94 @@
 var DjangoPagedown = DjangoPagedown | {};
 
 DjangoPagedown = (function() {
+  var converter = Markdown.getSanitizingConverter();
+  var editors = {};
+  var elements;
 
-    var converter,
-        editors,
-        elements;
+  Markdown.Extra.init(converter, {
+    extensions: "all"
+  });
 
-    var that = this;
+  var setupEditor = function(element) {
+    var input = element.getElementsByClassName("wmd-input")[0];
+    var id = input.id.substr(9);
+    if (!editors.hasOwnProperty(id)) {
+      var editor = new Markdown.Editor(converter, id, {});
 
-    var isPagedownable = function(el) {
-        return el.id.indexOf('wmd-input') > -1;
-    };
+      // Handle image upload
+      if (element.classList.contains("image-upload-enabled")) {
+        var upload = element.getElementsByClassName("pagedown-image-upload")[0];
+        var url = upload.getElementsByClassName("url-input")[0];
+        var file = upload.getElementsByClassName("file-input")[0];
+        var cancel = upload.getElementsByClassName("deletelink")[0];
+        var submit = upload.getElementsByClassName("submit-input")[0];
 
-    var createEditor = function(el) {
-        if (isPagedownable(el)) {
-            if (! that.editors.hasOwnProperty(el.id)) {
-                var id = el.id.substr(9);
-                that.editors[el.id] = new Markdown.Editor(that.converter, id, {});
-                that.editors[el.id].run();
-                return true;
+        var reset = function() {
+          upload.classList.remove("show");
+          url.value = "";
+          file.value = "";
+        };
+
+        var uploadFile = function(file, callback) {
+          var data = new FormData();
+          var request = new XMLHttpRequest();
+          data.append("file", file);
+          request.open("POST", "/pagedown/image-upload/", true);
+          request.addEventListener("load", function() {
+            var response = JSON.parse(request.response);
+            if (response.success) {
+              callback(response.url);
             } else {
-                console.log("Pagedown editor already attached to element: <#" + el.id + ">");
+              if (response.error) {
+                alert(response.error);
+              }
+              callback(null);
             }
-        }
-        return false;
-    };
+            reset();
+          });
+          request.send(data);
+        };
 
-    var destroyEditor = function(el) {
-        if ( that.editors.hasOwnProperty(el.id)) {
-            delete that.editors[el.id];
-            return true;
-        }
-        return false;
-    };
-
-    var init = function() {
-        that.converter = Markdown.getSanitizingConverter();
-        Markdown.Extra.init(that.converter, {
-            extensions: "all"
+        editor.hooks.set("insertImageDialog", function(callback) {
+          upload.classList.add("show");
+          cancel.addEventListener("click", function() {
+            callback(null);
+            reset();
+            event.preventDefault();
+          });
+          submit.addEventListener("click", function(event) {
+            if (url.value.length > 0) {
+              callback(url.value);
+              reset();
+            } else if (file.files.length > 0) {
+              uploadFile(file.files[0], callback);
+            } else {
+              callback(null);
+              reset();
+            }
+            event.preventDefault();
+          });
+          return true;
         });
-        that.elements = document.getElementsByTagName("textarea");
-        that.editors = {};
-        for (var i = 0; i < that.elements.length; ++i){
-            if ( isPagedownable(that.elements[i]) ) {
-                createEditor(that.elements[i]);
-            }
-        }
-    };
+      }
 
-    return {
-        init: function() {
-            return init();
-        },
-        createEditor: function(el) {
-            return createEditor(el);
-        },
-        destroyEditor: function(el) {
-            return destroyEditor(el);
-        },
-    };
+      editor.run();
+      editors[id] = editor;
+    }
+  };
+
+  var init = function() {
+    elements = document.getElementsByClassName("wmd-wrapper");
+    for (var i = 0; i < elements.length; ++i) {
+      setupEditor(elements[i]);
+    }
+  };
+
+  return {
+    init: function() {
+      return init();
+    }
+  };
 })();
 
 window.onload = DjangoPagedown.init;
