@@ -40,8 +40,8 @@
 
 .wmd-preview {
   width: 100%;
-
-  max-height: 400px;
+  max-width: 624px;
+  max-height: 600px;
   overflow-y: auto;
 
   box-sizing: border-box;
