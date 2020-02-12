@@ -151,6 +151,40 @@ class MyNewWidget(PagedownWidget):
 ...
 ```
 
+## Image Uploads
+
+You can enable image uploads, allowing your users to upload new images to the server and have them automatically inserted into the Pagedown widget (instead of just adding image URLs):
+
+![Screenshot of Django Admin with image upload enabled](https://github.com/timmyomahony/django-pagedown/blob/master/image-upload.png?raw=true "Screenshot of Django Admin with image upload enabled")
+
+To do so:
+
+1. Make sure you have set a `MEDIA_URL` and `MEDIA_ROOT` so that uploads will be propertly saved
+2. Add `PAGEDOWN_IMAGE_UPLOAD_ENABLED=True` to your settings
+3. Include the pagedown paths in your `urls.py` so that the upload endpoint is available
+
+```py
+    # ...
+    urlpatterns = [
+        path('', include('pagedown.urls')),
+        # ...
+    ]
+```
+
+This will add the URL `/pagedown/image-upload/` endpoint to your project. You can [see the default view that handles the upload here](https://github.com/timmyomahony/django-pagedown/blob/master/pagedown/views.py)
+
+The following options are available via your settings to tweak how the image upload works:
+
+- `PAGEDOWN_IMAGE_UPLOAD_EXTENSIONS` can be used to limit the extensions allowed for upload (default is `jpg`, `jpeg`, `png`, `svg`, `webp`)
+- `PAGEDOWN_IMAGE_UPLOAD_MAX_SIZE` can be used to limit the max size of uploads (default is 10mb)
+- `PAGEDOWN_IMAGE_UPLOAD_PATH` can be used to change the path within your media root (default is `pagedown-uploads`)
+
+Check out the `pagedown_init.js` script to [see how the upload is being performed on the client side](https://github.com/timmyomahony/django-pagedown/blob/master/pagedown/static/pagedown_init.js).
+
+### Caveats
+
+Be aware the the default endpoint isn't CSRF protected and also isn't restricted to logged-in users.
+
 ## Example
 
 You can see a fully-fledged example of the widget in [`django-pagedown-example`](https://github.com/timmyomahony/django-pagedown-example)

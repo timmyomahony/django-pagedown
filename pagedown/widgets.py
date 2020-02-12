@@ -1,3 +1,4 @@
+from django.conf import settings
 from django import forms
 from django.contrib.admin import widgets
 
@@ -11,9 +12,16 @@ class PagedownWidget(forms.Textarea):
         self.attrs['class'] = '{} wmd-input'.format(
             self.attrs.get('class', ''))
 
+    def get_context(self, name, value, attrs):
+        context = super(PagedownWidget, self).get_context(name, value, attrs)
+        context["image_upload_enabled"] = getattr(
+            settings, 'PAGEDOWN_IMAGE_UPLOAD_ENABLED', False)
+        return context
+
     class Media:
         css = {
-            'all': ('pagedown/demo/browser/demo.css',)
+            'all': ('pagedown/demo/browser/demo.css',
+                    'pagedown.css')
         }
         js = ('pagedown/Markdown.Converter.js',
               'pagedown-extra/pagedown/Markdown.Converter.js',
@@ -28,7 +36,7 @@ class AdminPagedownWidget(PagedownWidget, widgets.AdminTextareaWidget):
     class Media:
         css = {
             'all': ('pagedown/demo/browser/demo.css',
-                    'admin/css/pagedown.css',)
+                    'admin/pagedown/css/pagedown.css',)
         }
-        js = ('admin/js/jquery.init.js',
-              'admin/js/pagedown.js')
+        js = ('admin/pagedown/js/jquery.init.js',
+              'admin/pagedown/js/pagedown.js')
