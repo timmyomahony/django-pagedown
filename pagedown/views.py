@@ -16,6 +16,8 @@ IMAGE_UPLOAD_MAX_SIZE = getattr(
     settings, 'PAGEDOWN_IMAGE_UPLOAD_MAX_SIZE', 10 * 1024 * 1024)
 IMAGE_UPLOAD_PATH = getattr(
     settings, 'PAGEDOWN_IMAGE_UPLOAD_PATH', 'pagedown-uploads')
+IMAGE_UPLOAD_ENABLED = getattr(
+    settings, 'PAGEDOWN_IMAGE_UPLOAD_ENABLED', False)
 
 
 @csrf_exempt
@@ -23,6 +25,8 @@ def image_upload_view(request):
     error = False
     file = request.FILES['file']
 
+    if not IMAGE_UPLOAD_ENABLED:
+        error = 'Image upload is disabled'
     if request.method != 'POST':
         error = 'Method not allowed'
     if not file:

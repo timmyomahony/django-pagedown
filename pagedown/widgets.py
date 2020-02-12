@@ -15,7 +15,7 @@ class PagedownWidget(forms.Textarea):
     def get_context(self, name, value, attrs):
         context = super(PagedownWidget, self).get_context(name, value, attrs)
         context["image_upload_enabled"] = getattr(
-            settings, 'PAGEDOWN_ENABLE_IMAGE_UPLOAD', False)
+            settings, 'PAGEDOWN_IMAGE_UPLOAD_ENABLED', False)
         return context
 
     class Media:
