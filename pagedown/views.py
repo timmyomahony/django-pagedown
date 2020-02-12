@@ -22,15 +22,21 @@ IMAGE_UPLOAD_PATH = getattr(
 @login_required
 @csrf_exempt
 def image_upload_view(request):
+    error = False
     file = request.FILES['file']
+
     if request.method != 'POST':
-        return JsonResponse({'success': False, 'error': 'Method not allowed'})
+        error = 'Method not allowed'
     if not file:
-        return JsonResponse({'success': False, 'error': 'No file found'})
+        error = 'No file found'
     if not any([file.name.endswith(e) for e in IMAGE_UPLOAD_EXTENSIONS]):
-        return JsonResponse({'success': False, 'error': 'Invalid extension'})
+        error = 'Invalid extension'
     if file.size > IMAGE_UPLOAD_MAX_SIZE:
-        return JsonResponse({'success': False, 'error': 'File too large'})
+        error = 'File too large'
+
+    if error:
+        return JsonResponse({'success': False, 'error': error})
+
     path = os.path.join(IMAGE_UPLOAD_PATH, file.name)
     path = default_storage.save(path, file)
     url = default_storage.url(path)
