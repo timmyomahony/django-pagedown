@@ -1,64 +1,132 @@
 var DjangoPagedown = DjangoPagedown | {};
 
 DjangoPagedown = (function() {
+  var converter = Markdown.getSanitizingConverter();
+  var editors = {};
+  var elements;
 
-    var converter,
-        editors,
-        elements;
+  Markdown.Extra.init(converter, {
+    extensions: "all"
+  });
 
-    var that = this;
+  var createEditor = function(element) {
+    var input = element.getElementsByClassName("wmd-input")[0];
+    var id = input.id.substr(9);
+    if (!editors.hasOwnProperty(id)) {
+      var editor = new Markdown.Editor(converter, id, {});
 
-    var isPagedownable = function(el) {
-        return el.id.indexOf('wmd-input') > -1;
-    };
+      // Handle image upload
+      if (element.classList.contains("image-upload-enabled")) {
+        var upload = element.getElementsByClassName("pagedown-image-upload")[0];
+        var url = upload.getElementsByClassName("url-input")[0];
+        var file = upload.getElementsByClassName("file-input")[0];
+        var cancel = upload.getElementsByClassName("deletelink")[0];
+        var submit = upload.getElementsByClassName("submit-input")[0];
 
-    var createEditor = function(el) {
-        if (isPagedownable(el)) {
-            if (! that.editors.hasOwnProperty(el.id)) {
-                var id = el.id.substr(9);
-                that.editors[el.id] = new Markdown.Editor(that.converter, id, {});
-                that.editors[el.id].run();
-                return true;
-            } else {
-                console.log("Pagedown editor already attached to element: <#" + el.id + ">");
-            }
-        }
-        return false;
-    };
+        var close = function(value, callback) {
+          upload.classList.remove("show");
+          url.value = "";
+          file.value = "";
+          callback(value);
+        };
 
-    var destroyEditor = function(el) {
-        if ( that.editors.hasOwnProperty(el.id)) {
-            delete that.editors[el.id];
-            return true;
-        }
-        return false;
-    };
+        editor.hooks.set("insertImageDialog", function(callback) {
+          upload.classList.add("show");
 
-    var init = function() {
-        that.converter = Markdown.getSanitizingConverter();
-        Markdown.Extra.init(that.converter, {
-            extensions: "all"
+          cancel.addEventListener(
+            "click",
+            function(event) {
+              close(null, callback);
+              event.preventDefault();
+            },
+            { once: true }
+          );
+
+          submit.addEventListener(
+            "click",
+            function() {
+              // Regular URL
+              if (url.value.length > 0) {
+                close(url.value, callback);
+              }
+              // File upload
+              else if (file.files.length > 0) {
+                var data = new FormData();
+                var xhr = new XMLHttpRequest();
+                data.append("image", file.files[0]);
+                xhr.open("POST", "/pagedown/image-upload/", true);
+                xhr.addEventListener(
+                  "load",
+                  function() {
+                    if (xhr.status !== 200) {
+                      alert(xhr.statusText);
+                    } else {
+                      var response = JSON.parse(xhr.response);
+                      if (response.success) {
+                        close(response.url, callback);
+                      } else {
+                        if (response.error) {
+                          var error = "";
+                          for (var key in response.error) {
+                            if (response.error.hasOwnProperty(key)) {
+                              error += key + ":" + response.error[key];
+                            }
+                          }
+                          alert(error);
+                        }
+                        close(null, callback);
+                      }
+                    }
+                  },
+                  {
+                    once: true
+                  }
+                );
+                xhr.send(data);
+              } else {
+                // Nothing
+                close(null, callback);
+              }
+              event.preventDefault();
+            },
+            { once: true }
+          );
+
+          return true;
         });
-        that.elements = document.getElementsByTagName("textarea");
-        that.editors = {};
-        for (var i = 0; i < that.elements.length; ++i){
-            if ( isPagedownable(that.elements[i]) ) {
-                createEditor(that.elements[i]);
-            }
-        }
-    };
+      }
 
-    return {
-        init: function() {
-            return init();
-        },
-        createEditor: function(el) {
-            return createEditor(el);
-        },
-        destroyEditor: function(el) {
-            return destroyEditor(el);
-        },
-    };
+      editor.run();
+      editors[id] = editor;
+    }
+  };
+
+  var destroyEditor = function(element) {
+    if (editors.hasOwnProperty(element.id)) {
+      delete editors[el.id];
+      return true;
+    }
+    return false;
+  };
+
+  var init = function() {
+    elements = document.getElementsByClassName("wmd-wrapper");
+    for (var i = 0; i < elements.length; ++i) {
+      createEditor(elements[i]);
+    }
+  };
+
+  return {
+    init: function() {
+      return init();
+    },
+    createEditor: function(element) {
+      return createEditor(element);
+    },
+    destroyEditor: function(element) {
+      return destroyEditor(element);
+    }
+  };
 })();
 
 window.onload = DjangoPagedown.init;
