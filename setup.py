@@ -41,6 +41,7 @@ setup(
     # _Should_ work back to 1.1 but untested
     install_requires=[
         "Django >= 2.1",
+        "Pillow"
     ],
     license='LICENSE.txt',
     cmdclass={"build": build_with_submodules, "develop": develop_with_submodules},
