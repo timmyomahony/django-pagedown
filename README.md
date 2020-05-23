@@ -175,15 +175,10 @@ This will add the URL `/pagedown/image-upload/` endpoint to your project. You ca
 
 The following options are available via your settings to tweak how the image upload works:
 
-- `PAGEDOWN_IMAGE_UPLOAD_EXTENSIONS` can be used to limit the extensions allowed for upload (default is `jpg`, `jpeg`, `png`, `svg`, `webp`)
-- `PAGEDOWN_IMAGE_UPLOAD_MAX_SIZE` can be used to limit the max size of uploads (default is 10mb)
 - `PAGEDOWN_IMAGE_UPLOAD_PATH` can be used to change the path within your media root (default is `pagedown-uploads`)
+- `PAGEDOWN_IMAGE_UPLOAD_EXTENSIONS` can be used to limit the extensions allowed for upload (default is `jpg`, `jpeg`, `png`, `webp`)
 
 Check out the `pagedown_init.js` script to [see how the upload is being performed on the client side](https://github.com/timmyomahony/django-pagedown/blob/develop/pagedown/static/pagedown_init.js).
-
-### Caveats
-
-Be aware the the default endpoint isn't CSRF protected and also isn't restricted to logged-in users.
 
 ## Example
 

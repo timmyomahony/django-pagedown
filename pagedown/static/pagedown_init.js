@@ -52,27 +52,37 @@ DjangoPagedown = (function() {
               // File upload
               else if (file.files.length > 0) {
                 var data = new FormData();
-                var request = new XMLHttpRequest();
-                data.append("file", file.files[0]);
-                request.open("POST", "/pagedown/image-upload/", true);
-                request.addEventListener(
+                var xhr = new XMLHttpRequest();
+                data.append("image", file.files[0]);
+                xhr.open("POST", "/pagedown/image-upload/", true);
+                xhr.addEventListener(
                   "load",
                   function() {
-                    var response = JSON.parse(request.response);
-                    if (response.success) {
-                      close(response.url, callback);
+                    if (xhr.status !== 200) {
+                      alert(xhr.statusText);
                     } else {
-                      if (response.error) {
-                        alert(response.error);
+                      var response = JSON.parse(xhr.response);
+                      if (response.success) {
+                        close(response.url, callback);
+                      } else {
+                        if (response.error) {
+                          var error = "";
+                          for (var key in response.error) {
+                            if (response.error.hasOwnProperty(key)) {
+                              error += key + ":" + response.error[key];
+                            }
+                          }
+                          alert(error);
+                        }
+                        close(null, callback);
                       }
-                      close(null, callback);
                     }
                   },
                   {
                     once: true
                   }
                 );
-                request.send(data);
+                xhr.send(data);
               } else {
                 // Nothing
                 close(null, callback);
