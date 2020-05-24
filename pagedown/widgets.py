@@ -36,7 +36,7 @@ class AdminPagedownWidget(PagedownWidget, widgets.AdminTextareaWidget):
     class Media:
         css = {
             'all': ('pagedown/demo/browser/demo.css',
-                    'admin/pagedown/css/pagedown.css',)
+                    'admin/css/pagedown.css',)
         }
-        js = ('admin/pagedown/js/jquery.init.js',
-              'admin/pagedown/js/pagedown.js')
+        js = ('admin/js/jquery.init.js',
+              'admin/js/pagedown.js')
