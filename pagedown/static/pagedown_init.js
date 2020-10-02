@@ -103,7 +103,7 @@ DjangoPagedown = (function() {
 
   var destroyEditor = function(element) {
     if (editors.hasOwnProperty(element.id)) {
-      delete editors[el.id];
+      delete editors[element.id];
       return true;
     }
     return false;
