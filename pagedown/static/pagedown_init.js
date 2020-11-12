@@ -54,7 +54,7 @@ DjangoPagedown = (function() {
                 var data = new FormData();
                 var xhr = new XMLHttpRequest();
                 data.append("image", file.files[0]);
-                xhr.open("POST", "/pagedown/image-upload/", true);
+                xhr.open("POST", file.dataset.action, true);
                 xhr.addEventListener(
                   "load",
                   function() {
