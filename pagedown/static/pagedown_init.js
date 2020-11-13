@@ -11,6 +11,9 @@ DjangoPagedown = (function() {
 
   var createEditor = function(element) {
     var input = element.getElementsByClassName("wmd-input")[0];
+    if (input === undefined) {
+      return
+    }
     var id = input.id.substr(9);
     if (!editors.hasOwnProperty(id)) {
       var editor = new Markdown.Editor(converter, id, {});
