@@ -131,7 +131,7 @@ class MyNewWidget(PagedownWidget):
 
     class Media:
         css = {
-            'all': ('custom/stylesheets.css,)
+            'all': ('custom/stylesheets.css',)
         }
         js = ('custom/javascript.js',)
 ```
