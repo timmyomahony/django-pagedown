@@ -11,6 +11,9 @@ DjangoPagedown = (function() {
 
   var createEditor = function(element) {
     var input = element.getElementsByClassName("wmd-input")[0];
+    if (input === undefined) {
+      return
+    }
     var id = input.id.substr(9);
     if (!editors.hasOwnProperty(id)) {
       var editor = new Markdown.Editor(converter, id, {});
@@ -54,7 +57,7 @@ DjangoPagedown = (function() {
                 var data = new FormData();
                 var xhr = new XMLHttpRequest();
                 data.append("image", file.files[0]);
-                xhr.open("POST", "/pagedown/image-upload/", true);
+                xhr.open("POST", file.dataset.action, true);
                 xhr.addEventListener(
                   "load",
                   function() {
