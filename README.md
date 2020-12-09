@@ -178,6 +178,7 @@ The following options are available via your settings to tweak how the image upl
 
 - `PAGEDOWN_IMAGE_UPLOAD_PATH` can be used to change the path within your media root (default is `pagedown-uploads`)
 - `PAGEDOWN_IMAGE_UPLOAD_EXTENSIONS` can be used to limit the extensions allowed for upload (default is `jpg`, `jpeg`, `png`, `webp`)
+- `PAGEDOWN_IMAGE_UPLOAD_UNIQUE` can be used to ensure all uploads are stored in a uniquely named subfolder, e.g. `f748e009-c3cb-40f3-abf2-d103ab0ad259/my-file.png` (default is `False`)
 
 Check out the `pagedown_init.js` script to [see how the upload is being performed on the client side](https://github.com/timmyomahony/django-pagedown/blob/develop/pagedown/static/pagedown_init.js).
 
