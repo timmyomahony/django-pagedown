@@ -25,6 +25,7 @@ DjangoPagedown = (function() {
         var file = upload.getElementsByClassName("file-input")[0];
         var cancel = upload.getElementsByClassName("deletelink")[0];
         var submit = upload.getElementsByClassName("submit-input")[0];
+        var loading = upload.getElementsByClassName("submit-loading")[0];
 
         var close = function(value, callback) {
           upload.classList.remove("show");
@@ -54,6 +55,9 @@ DjangoPagedown = (function() {
               }
               // File upload
               else if (file.files.length > 0) {
+                loading.classList.add("show");
+                submit.classList.remove("show");
+
                 var data = new FormData();
                 var xhr = new XMLHttpRequest();
                 data.append("image", file.files[0]);
@@ -61,6 +65,9 @@ DjangoPagedown = (function() {
                 xhr.addEventListener(
                   "load",
                   function() {
+                    loading.classList.remove("show");
+                    submit.classList.add("show");
+
                     if (xhr.status !== 200) {
                       alert(xhr.statusText);
                     } else {
