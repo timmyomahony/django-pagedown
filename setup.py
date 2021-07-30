@@ -1,7 +1,8 @@
-from os import path
-from setuptools import setup
-from subprocess import check_call
 from distutils.command.build import build
+from os import path
+from subprocess import check_call
+
+from setuptools import setup
 from setuptools.command.develop import develop
 
 from pagedown import VERSION
@@ -52,6 +53,8 @@ setup(
         'Framework :: Django :: 2.1',
         'Framework :: Django :: 2.2',
         'Framework :: Django :: 3.0',
+        'Framework :: Django :: 3.1',
+        'Framework :: Django :: 3.2',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
@@ -60,5 +63,6 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8'
+        'Programming Language :: Python :: 3.9'
     ]
 )
