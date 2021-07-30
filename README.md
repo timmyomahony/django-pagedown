@@ -12,8 +12,8 @@ Version >= 2.0.0 of `django-pagedown` requires Django 2.1.0 or above (previous v
 ## Installation
 
 1. Get the code: `pip install django-pagedown`
-2. Add `pagedown.apps.PagedownConfig` to your `INSTALLED_APPS`
-3. Collect the static files: `python manage.py collectstatic`
+2. Add `pagedown.apps.PagedownConfig` to your `INSTALLED_APPS` in `settings.py`
+3. [Configure and collect](https://docs.djangoproject.com/en/dev/howto/static-files/#configuring-static-files) the static files: `python manage.py collectstatic`
 
 ## Usage
 
