@@ -16,7 +16,10 @@
             <div class="form-row">
                 <div>
                     <label class="label">From your computer</label>
-                    <input class="file-input" type="file" name="image" id="file" data-action="{% url 'pagedown-image-upload' %}" accept="image/*"/>
+                    <input class="file-input custom-file" type="file" name="image" id="file"
+                           data-action="{% url 'pagedown-image-upload' %}"
+                           {% if upload_dir %}data-upload-dir-override="{{ upload_dir }}"{% endif %}
+                           accept="image/*"/>
                 </div>
             </div>
             <div class="submit-row">

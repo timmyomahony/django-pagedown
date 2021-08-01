@@ -61,6 +61,11 @@ DjangoPagedown = (function() {
                 var data = new FormData();
                 var xhr = new XMLHttpRequest();
                 data.append("image", file.files[0]);
+                // override upload dir?
+                var uploadDir = file.getAttribute("data-upload-dir-override");
+                if (uploadDir) {
+                  data.append("upload-dir-override", uploadDir);
+                }
                 xhr.open("POST", file.dataset.action, true);
                 xhr.addEventListener(
                   "load",
